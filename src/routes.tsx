@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { MainLayout } from '@/components/layout/MainLayout';
 import { NotFoundPage } from '@/pages/NotFound';
+import { Library } from './pages/Library';
 
 export const router = createBrowserRouter([
-  {
+  /* {
     path: '/',
     element: <MainLayout />, //Layout with <Navbar /> and <Outlet />
     children: [
@@ -17,6 +17,10 @@ export const router = createBrowserRouter([
         element: <div>Book:id</div>, //<ReaderPage />,
       },
     ],
+  }, */
+  {
+    path: '/library',
+    element: <Library />,
   },
   {
     path: '/login',
