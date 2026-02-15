@@ -1,6 +1,6 @@
 function App() {
   return (
-    <div className="min-h-lvh bg-gray-300">
+    <div className="bg-gray-300">
       <span>Hello world</span>
     </div>
   );
