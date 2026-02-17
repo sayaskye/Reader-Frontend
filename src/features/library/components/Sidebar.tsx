@@ -1,31 +1,49 @@
-/// <reference types="vite-plugin-svgr/client" />
-import Logo from '@/assets/icon.svg?react';
+import {
+  Library,
+  LayoutDashboard,
+  Shapes,
+  Star,
+  History,
+  Settings,
+  MoonStar,
+  Sun,
+} from 'lucide-react';
+import { useTheme } from '@/hooks/useTheme';
 
 export const Sidebar = () => {
+  const { applyTheme, theme } = useTheme();
+  //TODO: this won't work this way, it is just a place holder
+  const changeTheme = theme === 'light' ? 'dark' : 'light';
   return (
-    <aside className="border-primary/10 bg-background-light dark:bg-background-dark/50 flex w-20 flex-col items-center gap-8 border-r py-8">
-      <div className="shadow-primary/20 flex h-12 w-12 items-center justify-center rounded-xl text-white shadow-lg">
-        <Logo />
+    <aside className="border-border-subtle bg-bg-sidebar flex w-20 flex-col items-center gap-8 border-r py-8">
+      <div className="bg-primary text-bg-main shadow-primary/10 flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl shadow-lg">
+        <Library strokeWidth={3} size={40} />
       </div>
       <nav className="flex flex-col gap-6">
-        <button className="text-primary bg-primary/10 flex h-12 w-12 items-center justify-center rounded-xl">
-          <span className="material-icons-round">D</span>
+        <button className="text-primary bg-primary/10 flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl">
+          <LayoutDashboard />
         </button>
-        <button className="hover:text-primary flex h-12 w-12 items-center justify-center rounded-xl text-slate-400 transition-colors">
-          <span className="material-icons-round">C</span>
+        <button className="hover:text-primary flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl transition-colors">
+          <Shapes />
         </button>
-        <button className="hover:text-primary flex h-12 w-12 items-center justify-center rounded-xl text-slate-400 transition-colors">
-          <span className="material-icons-round">F</span>
+        <button className="hover:text-primary flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl transition-colors">
+          <Star />
         </button>
-        <button className="hover:text-primary flex h-12 w-12 items-center justify-center rounded-xl text-slate-400 transition-colors">
-          <span className="material-icons-round">H</span>
+        <button className="hover:text-primary flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl transition-colors">
+          <History />
         </button>
       </nav>
       <div className="mt-auto flex flex-col gap-6">
-        <button className="hover:text-primary flex h-12 w-12 items-center justify-center rounded-xl text-slate-400 transition-colors">
-          <span className="material-icons-round">S</span>
+        <button className="hover:text-primary flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl transition-colors">
+          <Settings />
         </button>
-        <div className="bg-primary/20 border-primary/30 flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border">
+        <button
+          className="hover:text-primary flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl transition-colors"
+          onClick={() => applyTheme(changeTheme)}
+        >
+          {theme === 'light' ? <MoonStar /> : <Sun />}
+        </button>
+        <div className="bg-primary/20 border-primary/30 flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full border">
           <img
             alt="Profile"
             className="h-full w-full object-cover"

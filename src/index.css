@@ -1,26 +1,93 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-primary: #1919e6;
-  --color-background-light: #f6f6f8;
-  --color-background-dark: #111121;
-  --color-surface: #1a1a2e;
-  --color-accent-gold: #d4af37;
-  --color-soft-white: #e2e2e9;
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-bg-main: var(--bg-main);
+  --color-bg-sidebar: var(--bg-sidebar);
+  --color-card-bg: var(--card-bg);
+  --color-border-subtle: var(--border-subtle);
+  --color-input-bg: var(--input-bg);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+
+  /* Variants for dark main */
+  --color-whiskey-50: #fbf7f1;
+  --color-whiskey-100: #f6edde;
+  --color-whiskey-200: #ebd8bd;
+  --color-whiskey-300: #debc93;
+  --color-whiskey-400: #d4a373;
+  --color-whiskey-500: #c68249;
+  --color-whiskey-600: #b86d3e;
+  --color-whiskey-700: #995635;
+  --color-whiskey-800: #7c4630;
+  --color-whiskey-900: #643c2a;
+  --color-whiskey-950: #361e14;
+
+  /* variants for light main */
+  --color-bull-shot-50: #f9f7ed;
+  --color-bull-shot-100: #f1ecd0;
+  --color-bull-shot-200: #e5d6a3;
+  --color-bull-shot-300: #d6bb6e;
+  --color-bull-shot-400: #c9a246;
+  --color-bull-shot-500: #ba8d38;
+  --color-bull-shot-600: #a06f2e;
+  --color-bull-shot-700: #8b5a2b;
+  --color-bull-shot-800: #6c4527;
+  --color-bull-shot-900: #5d3a26;
+  --color-bull-shot-950: #351f13;
+}
+
+:root,
+.dark {
+  --primary: #d4a373;
+  --primary-hover: #e6b98d;
+  --bg-main: #1c1917;
+  --bg-sidebar: #24201d;
+  --card-bg: #2a2522;
+  --border-subtle: #3e3632;
+  --input-bg: #332d29;
+  --text-main: #e6dcca;
+  --text-muted: #a89f91;
+  --ring-color: #d4a373;
+}
+
+.light {
+  --primary: #8b5a2b;
+  --primary-hover: #6f451f;
+  --bg-main: #fdfbf7;
+  --bg-sidebar: #f5f0e6;
+  --card-bg: #fffefc;
+  --border-subtle: #e6dcca;
+  --input-bg: #f0eae0;
+  --text-main: #3e2723;
+  --text-muted: #8d6e63;
+  --ring-color: #8b5a2b;
 }
 
 @variant dark (&:where(.dark, .dark *));
+@variant light (&:where(.light, .light *));
+
+@utility glass-panel {
+  background-color: color-mix(in srgb, var(--bg-main), transparent 15%);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--border-subtle), transparent 50%);
+}
 
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(25, 25, 230, 0.2);
+  background: color-mix(in srgb, var(--primary), transparent 80%);
   border-radius: 10px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(25, 25, 230, 0.4);
+  background: color-mix(in srgb, var(--primary), transparent 60%);
 }
