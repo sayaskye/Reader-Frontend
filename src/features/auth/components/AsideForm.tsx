@@ -7,7 +7,7 @@ export const AsideForm = () => {
       <div className="absolute -right-24 -bottom-24 h-64 w-64 rounded-full bg-yellow-600/5 blur-[80px]"></div>
       <div className="relative z-10">
         <div className="group flex cursor-default items-center gap-2">
-          <div className="bg-primary text-bg-main shadow-primary/20 flex h-10 w-10 items-center justify-center rounded-lg shadow-lg">
+          <div className="bg-primary text-text-main shadow-primary/20 flex h-10 w-10 items-center justify-center rounded-lg shadow-lg">
             <Library strokeWidth={3} size={40} />
           </div>
           <span className="text-text-main text-2xl font-bold tracking-tight">
