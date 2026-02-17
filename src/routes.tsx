@@ -1,22 +1,12 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 
-import { Library, Reader, NotFoundPage } from '@/pages';
+import { Library, Reader, NotFoundPage, Login } from '@/pages';
 
 export const router = createBrowserRouter([
-  /* {
+  {
     path: '/',
-    element: <MainLayout />, //Layout with <Navbar /> and <Outlet />
-    children: [
-      {
-        index: true,
-        element: <div>Home</div>, //<HomePage />,
-      },
-      {
-        path: 'reader/:bookId',
-        element: <div>Book:id</div>, //<ReaderPage />,
-      },
-    ],
-  }, */
+    element: <Navigate to="/login" />,
+  },
   {
     path: '/library',
     element: <Library />,
@@ -27,7 +17,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <div>Login</div>, //<LoginPage />,
+    element: <Login />,
   },
   {
     path: '*',
