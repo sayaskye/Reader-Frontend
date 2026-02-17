@@ -1,6 +1,8 @@
 import { BookOpenText, Grid2x2, List, Play, Star, StarOff } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export const LibraryContent = () => {
+  const navigate = useNavigate();
   return (
     <div className="custom-scrollbar flex-1 overflow-y-auto p-8">
       <div className="mb-8 flex items-center justify-between">
@@ -30,7 +32,10 @@ export const LibraryContent = () => {
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsYg1KOME5Edn5X5avghibtqqFH2NQNF__sSqamymZSmRci8-6LoxBGmzbA8GzpllItoHMdq8Pz13XXD4-Mq9fkpx-nPAagMVKXnWbyZK5z2jOB3gvoR4BDVXmjNT9-1WSrcKNtk2nS-hm-u0q5ofWbeyVax43Ys_Aa1rL2nf7G0KAnq9dltreljjt5ffoWqFuHwTneGEQj-vrVa65MT4rP5GWhR3_4jWdePfxCQBy9SNLA74VogQmI6Yc6K03E2KEXyowc1R5v50q"
             />
             <div className="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/80 via-transparent to-transparent p-4 opacity-0 transition-opacity group-hover:opacity-100">
-              <button className="bg-primary text-bg-main flex items-center justify-center gap-2 rounded-lg py-2 text-sm font-bold shadow-lg">
+              <button
+                className="bg-primary text-bg-main flex items-center justify-center gap-2 rounded-lg py-2 text-sm font-bold shadow-lg"
+                onClick={() => navigate('/reader/asd')}
+              >
                 <Play size={14} />
                 Continue
               </button>
@@ -39,7 +44,7 @@ export const LibraryContent = () => {
               <StarOff size={14} />
             </button>
             <div className="absolute top-3 left-3">
-              <span className="bg-primary text-bg-main rounded px-2 py-1 text-[10px] font-black tracking-wider uppercase shadow-sm">
+              <span className="bg-primary text-bg-main text-ssm rounded px-2 py-1 font-black tracking-wider uppercase shadow-sm">
                 Reading
               </span>
             </div>
@@ -51,7 +56,7 @@ export const LibraryContent = () => {
             <p className="text-text-muted text-xs font-medium">
               Eleanor P. Vance
             </p>
-            <div className="text-text-muted mt-3 flex items-center justify-between text-[10px] font-semibold tracking-tight uppercase">
+            <div className="text-text-muted text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
               <span>Last read: 2h ago</span>
               <span className="text-primary font-bold">64%</span>
             </div>
@@ -77,7 +82,7 @@ export const LibraryContent = () => {
               <Star size={14} />
             </button>
             <div className="absolute top-3 left-3">
-              <span className="rounded bg-emerald-700 px-2 py-1 text-[10px] font-black tracking-wider text-white uppercase shadow-sm">
+              <span className="text-ssm rounded bg-emerald-700 px-2 py-1 font-black tracking-wider text-white uppercase shadow-sm">
                 Finished
               </span>
             </div>
@@ -87,7 +92,7 @@ export const LibraryContent = () => {
               Midnight Circuits
             </h3>
             <p className="text-text-muted text-xs font-medium">Julian Thorne</p>
-            <div className="text-text-muted mt-3 flex items-center justify-between text-[10px] font-semibold tracking-tight uppercase">
+            <div className="text-text-muted text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
               <span>Read on Oct 12</span>
               <span className="font-bold text-emerald-500">100%</span>
             </div>
@@ -107,7 +112,7 @@ export const LibraryContent = () => {
               <span className="text-sm">star</span>
             </button>
             <div className="absolute top-3 left-3">
-              <span className="bg-primary text-bg-main rounded px-2 py-1 text-[10px] font-black tracking-wider uppercase shadow-sm">
+              <span className="bg-primary text-bg-main text-ssm rounded px-2 py-1 font-black tracking-wider uppercase shadow-sm">
                 Reading
               </span>
             </div>
@@ -117,7 +122,7 @@ export const LibraryContent = () => {
               Data Architectures
             </h3>
             <p className="text-text-muted text-xs font-medium">Sarah Jenkins</p>
-            <div className="text-text-muted mt-3 flex items-center justify-between text-[10px] font-semibold tracking-tight uppercase">
+            <div className="text-text-muted text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
               <span>Last read: 1d ago</span>
               <span className="text-primary font-bold">12%</span>
             </div>
@@ -137,7 +142,7 @@ export const LibraryContent = () => {
               <span className="text-sm">star_outline</span>
             </button>
             <div className="absolute top-3 left-3">
-              <span className="rounded bg-stone-600 px-2 py-1 text-[10px] font-black tracking-wider text-white uppercase shadow-sm">
+              <span className="text-ssm rounded bg-stone-600 px-2 py-1 font-black tracking-wider text-white uppercase shadow-sm">
                 To Read
               </span>
             </div>
@@ -147,7 +152,7 @@ export const LibraryContent = () => {
               Echoes of Time
             </h3>
             <p className="text-text-muted text-xs font-medium">Marcus Aurel</p>
-            <div className="text-text-muted mt-3 flex items-center justify-between text-[10px] font-semibold tracking-tight uppercase">
+            <div className="text-text-muted text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
               <span>Added: 3d ago</span>
               <span className="text-text-muted">0%</span>
             </div>
@@ -167,7 +172,7 @@ export const LibraryContent = () => {
               <span className="text-sm">star</span>
             </button>
             <div className="absolute top-3 left-3">
-              <span className="bg-primary text-bg-main rounded px-2 py-1 text-[10px] font-black tracking-wider uppercase shadow-sm">
+              <span className="bg-primary text-bg-main text-ssm rounded px-2 py-1 font-black tracking-wider uppercase shadow-sm">
                 Reading
               </span>
             </div>
@@ -177,7 +182,7 @@ export const LibraryContent = () => {
               Future Theory
             </h3>
             <p className="text-text-muted text-xs font-medium">Liam Hudson</p>
-            <div className="text-text-muted mt-3 flex items-center justify-between text-[10px] font-semibold tracking-tight uppercase">
+            <div className="text-text-muted text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
               <span>Last read: 4h ago</span>
               <span className="text-primary font-bold">89%</span>
             </div>
@@ -197,7 +202,7 @@ export const LibraryContent = () => {
               <span className="text-sm">star_outline</span>
             </button>
             <div className="absolute top-3 left-3">
-              <span className="rounded bg-emerald-700 px-2 py-1 text-[10px] font-black tracking-wider text-white uppercase shadow-sm">
+              <span className="text-ssm rounded bg-emerald-700 px-2 py-1 font-black tracking-wider text-white uppercase shadow-sm">
                 Finished
               </span>
             </div>
@@ -207,7 +212,7 @@ export const LibraryContent = () => {
               The Silent Pulse
             </h3>
             <p className="text-text-muted text-xs font-medium">Emily Chen</p>
-            <div className="text-text-muted mt-3 flex items-center justify-between text-[10px] font-semibold tracking-tight uppercase">
+            <div className="text-text-muted text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
               <span>Read on Sep 29</span>
               <span className="font-bold text-emerald-500">100%</span>
             </div>
@@ -224,7 +229,7 @@ export const LibraryContent = () => {
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9kDbFRA0qkKKqE9p4cRJk4s5JBSL6qeoWhflOCkUxKRQS0j3sNei_YLniJVINwYTWHJ4Jj4Kvy_PGAv5EbDyuYznbPRVxPWDvACvB2mtlGIytId4joQMZrq6_GO1eT55tU5U0qLzo58NveHKbj0OyNjHFTRhwk5kzrrIpWgUwUI43FNWetSRT15Bng07A-QN8QGdTL4S1Rr2ul2hAkyBqYLGZoRUj5JpUTwFuBQu_7aIwGVeboTgKKeX-v8lXTtPqoQv-IZlnufQd"
             />
             <div className="absolute top-3 left-3">
-              <span className="rounded bg-stone-600 px-2 py-1 text-[10px] font-black tracking-wider text-white uppercase shadow-sm">
+              <span className="text-ssm rounded bg-stone-600 px-2 py-1 font-black tracking-wider text-white uppercase shadow-sm">
                 To Read
               </span>
             </div>
@@ -234,7 +239,7 @@ export const LibraryContent = () => {
               Narrative Structures
             </h3>
             <p className="text-text-muted text-xs font-medium">B.R. Brooks</p>
-            <div className="text-text-muted mt-3 flex items-center justify-between text-[10px] font-semibold tracking-tight uppercase">
+            <div className="text-text-muted text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
               <span>Added: 1w ago</span>
               <span className="text-text-muted">0%</span>
             </div>
@@ -254,7 +259,7 @@ export const LibraryContent = () => {
               <span className="text-sm">star</span>
             </button>
             <div className="absolute top-3 left-3">
-              <span className="bg-primary text-bg-main rounded px-2 py-1 text-[10px] font-black tracking-wider uppercase shadow-sm">
+              <span className="bg-primary text-bg-main text-ssm rounded px-2 py-1 font-black tracking-wider uppercase shadow-sm">
                 Reading
               </span>
             </div>
@@ -264,7 +269,7 @@ export const LibraryContent = () => {
               Mountain Peak
             </h3>
             <p className="text-text-muted text-xs font-medium">Simon Crest</p>
-            <div className="text-text-muted mt-3 flex items-center justify-between text-[10px] font-semibold tracking-tight uppercase">
+            <div className="text-text-muted text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
               <span>Last read: 12m ago</span>
               <span className="text-primary font-bold">42%</span>
             </div>

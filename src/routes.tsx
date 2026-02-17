@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { NotFoundPage } from '@/pages/NotFound';
-import { Library } from './pages/Library';
+import { Library, Reader, NotFoundPage } from '@/pages';
 
 export const router = createBrowserRouter([
   /* {
@@ -21,6 +20,10 @@ export const router = createBrowserRouter([
   {
     path: '/library',
     element: <Library />,
+  },
+  {
+    path: '/reader/:id',
+    element: <Reader />,
   },
   {
     path: '/login',
