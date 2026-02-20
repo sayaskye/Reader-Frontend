@@ -5,9 +5,9 @@ import { StickToTop } from '@/features/library/components/StickToTop';
 
 export const Library = () => {
   return (
-    <div className="bg-bg-main text-text-main flex min-h-screen">
+    <div className="bg-background text-foreground flex min-h-screen">
       <Sidebar />
-      <main className="bg-bg-main flex h-screen flex-1 flex-col overflow-hidden">
+      <main className="bg-background flex h-screen flex-1 flex-col overflow-hidden">
         <StickToTop />
         <LibraryContent />
       </main>

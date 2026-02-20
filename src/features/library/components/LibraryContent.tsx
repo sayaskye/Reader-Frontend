@@ -7,24 +7,24 @@ export const LibraryContent = () => {
     <div className="custom-scrollbar flex-1 overflow-y-auto p-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-text-main font-serif text-3xl font-extrabold tracking-tight">
+          <h1 className="text-foreground font-serif text-3xl font-extrabold tracking-tight">
             Your Library
           </h1>
-          <p className="text-text-muted mt-1 text-sm">
+          <p className="text-foreground mt-1 text-sm">
             248 books in total • 12 currently being read
           </p>
         </div>
-        <div className="bg-input-bg border-border-subtle flex rounded-lg border p-1">
-          <button className="bg-card-bg text-primary rounded-md p-2 shadow-sm">
+        <div className="bg-secondary border-muted flex rounded-lg border p-1">
+          <button className="bg-card text-primary rounded-md p-2 shadow-sm">
             <Grid2x2 size={14} />
           </button>
-          <button className="text-text-muted hover:text-primary p-2 transition-colors">
+          <button className="text-foreground hover:text-primary p-2 transition-colors">
             <List size={14} />
           </button>
         </div>
       </div>
       <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-        <div className="group bg-card-bg border-border-subtle hover:border-primary/50 hover:shadow-primary/5 relative transform cursor-pointer overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+        <div className="group bg-card border-muted hover:border-primary/50 hover:shadow-primary/5 relative transform cursor-pointer overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
           <div className="relative aspect-[3/4.5] overflow-hidden">
             <img
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -33,7 +33,7 @@ export const LibraryContent = () => {
             />
             <div className="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/80 via-transparent to-transparent p-4 opacity-0 transition-opacity group-hover:opacity-100">
               <button
-                className="bg-primary text-bg-main flex items-center justify-center gap-2 rounded-lg py-2 text-sm font-bold shadow-lg"
+                className="bg-primary text-background flex items-center justify-center gap-2 rounded-lg py-2 text-sm font-bold shadow-lg"
                 onClick={() => navigate('/reader/asd')}
               >
                 <Play size={14} />
@@ -44,28 +44,28 @@ export const LibraryContent = () => {
               <StarOff size={14} />
             </button>
             <div className="absolute top-3 left-3">
-              <span className="bg-primary text-bg-main text-ssm rounded px-2 py-1 font-black tracking-wider uppercase shadow-sm">
+              <span className="bg-primary text-background text-ssm rounded px-2 py-1 font-black tracking-wider uppercase shadow-sm">
                 Reading
               </span>
             </div>
           </div>
           <div className="space-y-1 p-4">
-            <h3 className="text-text-main line-clamp-1 text-sm font-bold">
+            <h3 className="text-foreground line-clamp-1 text-sm font-bold">
               The Great Beyond
             </h3>
-            <p className="text-text-muted text-xs font-medium">
+            <p className="text-foreground text-xs font-medium">
               Eleanor P. Vance
             </p>
-            <div className="text-text-muted text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
+            <div className="text-foreground text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
               <span>Last read: 2h ago</span>
               <span className="text-primary font-bold">64%</span>
             </div>
           </div>
-          <div className="bg-border-subtle h-1 w-full overflow-hidden">
+          <div className="bg-muted h-1 w-full overflow-hidden">
             <div className="bg-primary h-full w-2/3"></div>
           </div>
         </div>
-        <div className="group bg-card-bg border-border-subtle hover:border-primary/50 hover:shadow-primary/5 relative transform cursor-pointer overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+        <div className="group bg-card border-muted hover:border-primary/50 hover:shadow-primary/5 relative transform cursor-pointer overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
           <div className="relative aspect-[3/4.5] overflow-hidden">
             <img
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -73,12 +73,12 @@ export const LibraryContent = () => {
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOur20fbLFl21Iy0bK9JVnzvn4NzYv6vG7uwqkMgl0CFof9DagpX_1PIXR_HxS2SdXax9WIpI0HOPUQzdsDY5gmvE0xJaxFa5xt1YYesnanW3VZt7i3v8ug11B1y7xqSj2W7tN_W8f5GNPEKcIv6sslG9pqGeuEcDfb-DL5TCQyMAFDqDCOAqp9ED-RlME4jnw1Bcq5tJM3J2jWNMTAxm7pLz5yLI3KpKJO-CZYQVwajDd8jIG794bNJCu__Pi5BFOUuGdQXRAg5cG"
             />
             <div className="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/80 via-transparent to-transparent p-4 opacity-0 transition-opacity group-hover:opacity-100">
-              <button className="bg-primary text-bg-main flex items-center justify-center gap-2 rounded-lg py-2 text-sm font-bold shadow-lg">
+              <button className="bg-primary text-background flex items-center justify-center gap-2 rounded-lg py-2 text-sm font-bold shadow-lg">
                 <BookOpenText size={16} />
                 Read Again
               </button>
             </div>
-            <button className="text-text-muted hover:text-primary absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 shadow-sm backdrop-blur-md transition-colors hover:bg-black/80">
+            <button className="text-foreground hover:text-primary absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 shadow-sm backdrop-blur-md transition-colors hover:bg-black/80">
               <Star size={14} />
             </button>
             <div className="absolute top-3 left-3">
@@ -88,20 +88,20 @@ export const LibraryContent = () => {
             </div>
           </div>
           <div className="space-y-1 p-4">
-            <h3 className="text-text-main line-clamp-1 text-sm font-bold">
+            <h3 className="text-foreground line-clamp-1 text-sm font-bold">
               Midnight Circuits
             </h3>
-            <p className="text-text-muted text-xs font-medium">Julian Thorne</p>
-            <div className="text-text-muted text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
+            <p className="text-foreground text-xs font-medium">Julian Thorne</p>
+            <div className="text-foreground text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
               <span>Read on Oct 12</span>
               <span className="font-bold text-emerald-500">100%</span>
             </div>
           </div>
-          <div className="bg-border-subtle h-1 w-full overflow-hidden">
+          <div className="bg-muted h-1 w-full overflow-hidden">
             <div className="h-full w-full bg-emerald-600"></div>
           </div>
         </div>
-        <div className="group bg-card-bg border-border-subtle hover:border-primary/50 hover:shadow-primary/5 relative transform cursor-pointer overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+        <div className="group bg-card border-muted hover:border-primary/50 hover:shadow-primary/5 relative transform cursor-pointer overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
           <div className="relative aspect-[3/4.5] overflow-hidden">
             <img
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -112,33 +112,33 @@ export const LibraryContent = () => {
               <span className="text-sm">star</span>
             </button>
             <div className="absolute top-3 left-3">
-              <span className="bg-primary text-bg-main text-ssm rounded px-2 py-1 font-black tracking-wider uppercase shadow-sm">
+              <span className="bg-primary text-background text-ssm rounded px-2 py-1 font-black tracking-wider uppercase shadow-sm">
                 Reading
               </span>
             </div>
           </div>
           <div className="space-y-1 p-4">
-            <h3 className="text-text-main line-clamp-1 text-sm font-bold">
+            <h3 className="text-foreground line-clamp-1 text-sm font-bold">
               Data Architectures
             </h3>
-            <p className="text-text-muted text-xs font-medium">Sarah Jenkins</p>
-            <div className="text-text-muted text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
+            <p className="text-foreground text-xs font-medium">Sarah Jenkins</p>
+            <div className="text-foreground text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
               <span>Last read: 1d ago</span>
               <span className="text-primary font-bold">12%</span>
             </div>
           </div>
-          <div className="bg-border-subtle h-1 w-full overflow-hidden">
+          <div className="bg-muted h-1 w-full overflow-hidden">
             <div className="bg-primary h-full w-1/6"></div>
           </div>
         </div>
-        <div className="group bg-card-bg border-border-subtle hover:border-primary/50 hover:shadow-primary/5 relative transform cursor-pointer overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+        <div className="group bg-card border-muted hover:border-primary/50 hover:shadow-primary/5 relative transform cursor-pointer overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
           <div className="relative aspect-[3/4.5] overflow-hidden">
             <img
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
               data-alt="Vintage book cover with golden ornaments"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuCii3fwdpgTrC05NwQxzw1wji4lOmmPhkqotxHUPGiPcf2BGAIm47wRhZBBObaqCE3_TdKgDOrWwVy6ok7oJZYnIoJFF86g87imI3DGVqJj5FQsaPM5BtZnZ8Lz14p6aOBIDUyvohUX01OLhJVSw79wA_9qWYGA7PradP2IQondlr8uPdTvBSoDIFqDPFjdLmNt5mCwFH1fAZ2V4GxnA9eDg6RxPkjzl_-gD8_mQZSDqA7M1VWHgc6YX1gN1V1MMAHwMWqiKFvjZu6h"
             />
-            <button className="text-text-muted absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 shadow-sm backdrop-blur-md transition-colors hover:bg-black/80">
+            <button className="text-foreground absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 shadow-sm backdrop-blur-md transition-colors hover:bg-black/80">
               <span className="text-sm">star_outline</span>
             </button>
             <div className="absolute top-3 left-3">
@@ -148,20 +148,20 @@ export const LibraryContent = () => {
             </div>
           </div>
           <div className="space-y-1 p-4">
-            <h3 className="text-text-main line-clamp-1 text-sm font-bold">
+            <h3 className="text-foreground line-clamp-1 text-sm font-bold">
               Echoes of Time
             </h3>
-            <p className="text-text-muted text-xs font-medium">Marcus Aurel</p>
-            <div className="text-text-muted text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
+            <p className="text-foreground text-xs font-medium">Marcus Aurel</p>
+            <div className="text-foreground text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
               <span>Added: 3d ago</span>
-              <span className="text-text-muted">0%</span>
+              <span className="text-foreground">0%</span>
             </div>
           </div>
-          <div className="bg-border-subtle h-1 w-full overflow-hidden">
+          <div className="bg-muted h-1 w-full overflow-hidden">
             <div className="bg-primary h-full w-0"></div>
           </div>
         </div>
-        <div className="group bg-card-bg border-border-subtle hover:border-primary/50 hover:shadow-primary/5 relative transform cursor-pointer overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+        <div className="group bg-card border-muted hover:border-primary/50 hover:shadow-primary/5 relative transform cursor-pointer overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
           <div className="relative aspect-[3/4.5] overflow-hidden">
             <img
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -172,33 +172,33 @@ export const LibraryContent = () => {
               <span className="text-sm">star</span>
             </button>
             <div className="absolute top-3 left-3">
-              <span className="bg-primary text-bg-main text-ssm rounded px-2 py-1 font-black tracking-wider uppercase shadow-sm">
+              <span className="bg-primary text-background text-ssm rounded px-2 py-1 font-black tracking-wider uppercase shadow-sm">
                 Reading
               </span>
             </div>
           </div>
           <div className="space-y-1 p-4">
-            <h3 className="text-text-main line-clamp-1 text-sm font-bold">
+            <h3 className="text-foreground line-clamp-1 text-sm font-bold">
               Future Theory
             </h3>
-            <p className="text-text-muted text-xs font-medium">Liam Hudson</p>
-            <div className="text-text-muted text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
+            <p className="text-foreground text-xs font-medium">Liam Hudson</p>
+            <div className="text-foreground text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
               <span>Last read: 4h ago</span>
               <span className="text-primary font-bold">89%</span>
             </div>
           </div>
-          <div className="bg-border-subtle h-1 w-full overflow-hidden">
+          <div className="bg-muted h-1 w-full overflow-hidden">
             <div className="bg-primary h-full w-11/12"></div>
           </div>
         </div>
-        <div className="group bg-card-bg border-border-subtle hover:border-primary/50 hover:shadow-primary/5 relative transform cursor-pointer overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+        <div className="group bg-card border-muted hover:border-primary/50 hover:shadow-primary/5 relative transform cursor-pointer overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
           <div className="relative aspect-[3/4.5] overflow-hidden">
             <img
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
               data-alt="Stack of books on a background"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqTL5NAbKxpIsyT12xIpYIO52DhjIqRS9BvVu0IM-ZRcZYTgE5JuNKCRCaKzR8tmWTef8no0pS4gRTBjeIR2Td-HGH3lDh5jLpYDxmk52xZmVcuC-JcmTKN_u210PnMGUsnUPMKRCFDsQeF40uKVc7-GiTWl4Kmdz3S1CjI-l2Upphzg9ERDJy14r5vnmvz8EXGBdDlry0fQx3Ym7bdj9tieEwDHR3k3NxmKIvzwDp5MLYrvlAWrapG87OpU5UDncCQ4Zml_ZIVr0n"
             />
-            <button className="text-text-muted absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 shadow-sm backdrop-blur-md transition-colors hover:bg-black/80">
+            <button className="text-foreground absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/60 shadow-sm backdrop-blur-md transition-colors hover:bg-black/80">
               <span className="text-sm">star_outline</span>
             </button>
             <div className="absolute top-3 left-3">
@@ -208,20 +208,20 @@ export const LibraryContent = () => {
             </div>
           </div>
           <div className="space-y-1 p-4">
-            <h3 className="text-text-main line-clamp-1 text-sm font-bold">
+            <h3 className="text-foreground line-clamp-1 text-sm font-bold">
               The Silent Pulse
             </h3>
-            <p className="text-text-muted text-xs font-medium">Emily Chen</p>
-            <div className="text-text-muted text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
+            <p className="text-foreground text-xs font-medium">Emily Chen</p>
+            <div className="text-foreground text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
               <span>Read on Sep 29</span>
               <span className="font-bold text-emerald-500">100%</span>
             </div>
           </div>
-          <div className="bg-border-subtle h-1 w-full overflow-hidden">
+          <div className="bg-muted h-1 w-full overflow-hidden">
             <div className="h-full w-full bg-emerald-600"></div>
           </div>
         </div>
-        <div className="group bg-card-bg border-border-subtle hover:border-primary/50 hover:shadow-primary/5 relative transform cursor-pointer overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+        <div className="group bg-card border-muted hover:border-primary/50 hover:shadow-primary/5 relative transform cursor-pointer overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
           <div className="relative aspect-[3/4.5] overflow-hidden">
             <img
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -235,20 +235,20 @@ export const LibraryContent = () => {
             </div>
           </div>
           <div className="space-y-1 p-4">
-            <h3 className="text-text-main line-clamp-1 text-sm font-bold">
+            <h3 className="text-foreground line-clamp-1 text-sm font-bold">
               Narrative Structures
             </h3>
-            <p className="text-text-muted text-xs font-medium">B.R. Brooks</p>
-            <div className="text-text-muted text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
+            <p className="text-foreground text-xs font-medium">B.R. Brooks</p>
+            <div className="text-foreground text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
               <span>Added: 1w ago</span>
-              <span className="text-text-muted">0%</span>
+              <span className="text-foreground">0%</span>
             </div>
           </div>
-          <div className="bg-border-subtle h-1 w-full overflow-hidden">
+          <div className="bg-muted h-1 w-full overflow-hidden">
             <div className="bg-primary h-full w-0"></div>
           </div>
         </div>
-        <div className="group bg-card-bg border-border-subtle hover:border-primary/50 hover:shadow-primary/5 relative transform cursor-pointer overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+        <div className="group bg-card border-muted hover:border-primary/50 hover:shadow-primary/5 relative transform cursor-pointer overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
           <div className="relative aspect-[3/4.5] overflow-hidden">
             <img
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -259,28 +259,28 @@ export const LibraryContent = () => {
               <span className="text-sm">star</span>
             </button>
             <div className="absolute top-3 left-3">
-              <span className="bg-primary text-bg-main text-ssm rounded px-2 py-1 font-black tracking-wider uppercase shadow-sm">
+              <span className="bg-primary text-background text-ssm rounded px-2 py-1 font-black tracking-wider uppercase shadow-sm">
                 Reading
               </span>
             </div>
           </div>
           <div className="space-y-1 p-4">
-            <h3 className="text-text-main line-clamp-1 text-sm font-bold">
+            <h3 className="text-foreground line-clamp-1 text-sm font-bold">
               Mountain Peak
             </h3>
-            <p className="text-text-muted text-xs font-medium">Simon Crest</p>
-            <div className="text-text-muted text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
+            <p className="text-foreground text-xs font-medium">Simon Crest</p>
+            <div className="text-foreground text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
               <span>Last read: 12m ago</span>
               <span className="text-primary font-bold">42%</span>
             </div>
           </div>
-          <div className="bg-border-subtle h-1 w-full overflow-hidden">
+          <div className="bg-muted h-1 w-full overflow-hidden">
             <div className="bg-primary h-full w-2/5"></div>
           </div>
         </div>
       </div>
       <div className="mt-12 flex justify-center pb-8">
-        <button className="bg-bg-sidebar text-text-main hover:bg-input-bg border-border-subtle rounded-xl border px-8 py-3 text-sm font-bold shadow-sm transition-colors">
+        <button className="bg-card text-foreground hover:bg-secondary border-muted rounded-xl border px-8 py-3 text-sm font-bold shadow-sm transition-colors">
           Load More Titles
         </button>
       </div>

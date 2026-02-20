@@ -9,19 +9,19 @@ import {
 
 export const SettingsModal = () => {
   return (
-    <div className="bg-bg-main/20 fixed inset-0 z-40 flex items-center justify-center p-4 backdrop-blur-[2px]">
+    <div className="bg-background/20 fixed inset-0 z-40 flex items-center justify-center p-4 backdrop-blur-[2px]">
       <div className="glass-panel border-primary z-50 w-full max-w-lg overflow-hidden rounded-xl border">
         <div className="flex items-center justify-between border-b border-[#5D4037]/10 px-6 py-4">
-          <h2 className="text-text-main text-lg font-semibold tracking-tight">
+          <h2 className="text-foreground text-lg font-semibold tracking-tight">
             Appearance Settings
           </h2>
-          <button className="text-text-main cursor-pointer rounded-full p-2 transition-colors hover:bg-[#5D4037]/10">
+          <button className="text-foreground cursor-pointer rounded-full p-2 transition-colors hover:bg-[#5D4037]/10">
             <X />
           </button>
         </div>
         <div className="space-y-8 p-6">
           <section>
-            <label className="text-text-muted mb-3 block text-xs font-bold tracking-wider uppercase">
+            <label className="text-foreground mb-3 block text-xs font-bold tracking-wider uppercase">
               Font Face
             </label>
             <div className="grid grid-cols-3 gap-2 rounded-lg bg-[#5D4037]/5 p-1">
@@ -29,11 +29,11 @@ export const SettingsModal = () => {
                 <span className="font-serif text-xl">Aa</span>
                 <span className="text-ssm mt-1 font-medium">Serif</span>
               </button>
-              <button className="text-text-muted flex flex-col items-center rounded-md py-3 transition-all hover:bg-white/50">
+              <button className="text-foreground flex flex-col items-center rounded-md py-3 transition-all hover:bg-white/50">
                 <span className="font-sans text-xl">Aa</span>
                 <span className="text-ssm mt-1 font-medium">Sans</span>
               </button>
-              <button className="text-text-muted flex flex-col items-center rounded-md py-3 transition-all hover:bg-white/50">
+              <button className="text-foreground flex flex-col items-center rounded-md py-3 transition-all hover:bg-white/50">
                 <span className="font-mono text-xl">Aa</span>
                 <span className="text-ssm mt-1 font-medium">Mono</span>
               </button>
@@ -42,15 +42,15 @@ export const SettingsModal = () => {
           <section className="space-y-6">
             <div>
               <div className="mb-3 flex items-center justify-between">
-                <label className="text-text-muted text-xs font-bold tracking-wider uppercase">
+                <label className="text-foreground text-xs font-bold tracking-wider uppercase">
                   Font Size
                 </label>
                 <span className="text-primary text-xs font-semibold">18px</span>
               </div>
-              <div className="text-text-main flex items-center gap-4">
+              <div className="text-foreground flex items-center gap-4">
                 <ALargeSmall />
                 <input
-                  className="custom-slider bg-bg-sidebar h-1.5 w-full cursor-pointer appearance-none rounded-full"
+                  className="custom-slider bg-card h-1.5 w-full cursor-pointer appearance-none rounded-full"
                   max="32"
                   min="12"
                   type="range"
@@ -61,10 +61,10 @@ export const SettingsModal = () => {
             </div>
             <div className="grid grid-cols-2 gap-8">
               <div>
-                <label className="text-text-muted mb-3 block text-xs font-bold tracking-wider uppercase">
+                <label className="text-foreground mb-3 block text-xs font-bold tracking-wider uppercase">
                   Line Height
                 </label>
-                <div className="text-text-main flex items-center justify-between rounded-lg border border-[#5D4037]/10 bg-[#5D4037]/5 p-1">
+                <div className="text-foreground flex items-center justify-between rounded-lg border border-[#5D4037]/10 bg-[#5D4037]/5 p-1">
                   <button className="rounded p-1 transition-colors hover:bg-[#5D4037]/10">
                     <Minus />
                   </button>
@@ -75,10 +75,10 @@ export const SettingsModal = () => {
                 </div>
               </div>
               <div>
-                <label className="text-text-muted mb-3 block text-xs font-bold tracking-wider uppercase">
+                <label className="text-foreground mb-3 block text-xs font-bold tracking-wider uppercase">
                   Margins
                 </label>
-                <div className="text-text-main flex items-center justify-between rounded-lg border border-[#5D4037]/10 bg-[#5D4037]/5 p-1">
+                <div className="text-foreground flex items-center justify-between rounded-lg border border-[#5D4037]/10 bg-[#5D4037]/5 p-1">
                   <button className="rounded p-1 transition-colors hover:bg-[#5D4037]/10">
                     <UnfoldVertical />
                   </button>
@@ -91,7 +91,7 @@ export const SettingsModal = () => {
             </div>
           </section>
           <section>
-            <label className="text-text-muted mb-3 block text-xs font-bold tracking-wider uppercase">
+            <label className="text-foreground mb-3 block text-xs font-bold tracking-wider uppercase">
               Theme
             </label>
             <div className="grid grid-cols-3 gap-3">
@@ -112,7 +112,7 @@ export const SettingsModal = () => {
           </section>
         </div>
         <div className="flex items-center justify-between border-t border-[#5D4037]/10 bg-[#5D4037]/5 p-6">
-          <button className="text-text-muted text-sm font-medium transition-colors hover:text-[#3E2723]">
+          <button className="text-foreground text-sm font-medium transition-colors hover:text-[#3E2723]">
             Reset Defaults
           </button>
           <div className="flex gap-3">

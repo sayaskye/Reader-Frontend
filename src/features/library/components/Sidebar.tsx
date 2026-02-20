@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
   Library,
   LayoutDashboard,
@@ -14,9 +15,13 @@ export const Sidebar = () => {
   const { applyTheme, theme } = useTheme();
   //TODO: this won't work this way, it is just a place holder
   const changeTheme = theme === 'light' ? 'dark' : 'light';
+  const navigate = useNavigate();
   return (
-    <aside className="border-border-subtle bg-bg-sidebar flex w-20 flex-col items-center gap-8 border-r py-8">
-      <div className="bg-primary text-bg-main shadow-primary/10 flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl shadow-lg">
+    <aside className="border-muted bg-card flex w-20 flex-col items-center gap-8 border-r py-8">
+      <div
+        className="bg-primary text-background shadow-primary/10 flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl shadow-lg"
+        onClick={() => navigate('/login')}
+      >
         <Library strokeWidth={3} size={40} />
       </div>
       <nav className="flex flex-col gap-6">

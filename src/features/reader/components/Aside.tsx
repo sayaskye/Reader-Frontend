@@ -4,21 +4,21 @@ import { useNavigate } from 'react-router';
 export const Aside = () => {
   const navigate = useNavigate();
   return (
-    <aside className="bg-bg-sidebar border-card-bg z-20 flex h-full w-72 flex-col border-r shadow-xl shadow-black/10">
-      <div className="border-card-bg border-b p-6">
+    <aside className="bg-card border-card z-20 flex h-full w-72 flex-col border-r shadow-xl shadow-black/10">
+      <div className="border-card border-b p-6">
         <div className="mb-6 flex items-center gap-3">
           <div
-            className="bg-primary text-bg-main flex h-8 w-8 items-center justify-center rounded-lg shadow-sm"
+            className="bg-primary text-background flex h-8 w-8 items-center justify-center rounded-lg shadow-sm"
             onClick={() => navigate('/library')}
           >
             <Library strokeWidth={2} size={30} />
           </div>
-          <h1 className="text-text-main text-sm font-bold tracking-tight uppercase opacity-80">
+          <h1 className="text-foreground text-sm font-bold tracking-tight uppercase opacity-80">
             Library Navigator
           </h1>
         </div>
         <div className="space-y-1">
-          <div className="text-text-muted mb-3 text-xs font-semibold tracking-widest uppercase">
+          <div className="text-foreground mb-3 text-xs font-semibold tracking-widest uppercase">
             Book Details
           </div>
           <div className="group flex cursor-pointer gap-3">
@@ -31,10 +31,10 @@ export const Aside = () => {
               <div className="absolute inset-0 rounded ring-1 ring-black/10 ring-inset"></div>
             </div>
             <div className="flex flex-col justify-center">
-              <span className="text-text-main font-serif text-sm leading-tight font-bold">
+              <span className="text-foreground font-serif text-sm leading-tight font-bold">
                 The Midnight Horizon
               </span>
-              <span className="text-text-muted mt-1 text-xs">
+              <span className="text-foreground mt-1 text-xs">
                 Elena V. Sterling
               </span>
             </div>
@@ -43,13 +43,13 @@ export const Aside = () => {
       </div>
       <nav className="custom-scrollbar flex-1 overflow-y-auto p-4">
         <div className="mb-6">
-          <span className="text-text-muted text-ssm tracking-widest-plus px-2 font-bold uppercase">
+          <span className="text-foreground text-ssm tracking-widest-plus px-2 font-bold uppercase">
             Chapters
           </span>
           <ul className="mt-3 space-y-1">
             <li>
               <a
-                className="text-text-muted hover:bg-primary/10 hover:text-text-muted flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors"
+                className="text-foreground hover:bg-primary/10 hover:text-foreground flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors"
                 href="#"
               >
                 <span className="text-ssm w-4 font-serif opacity-60">01</span>
@@ -58,7 +58,7 @@ export const Aside = () => {
             </li>
             <li>
               <a
-                className="text-text-muted border-primary bg-card-bg/40 flex items-center gap-3 rounded-lg border-l-[3px] px-3 py-2 text-sm font-bold shadow-sm"
+                className="text-foreground border-primary bg-card/40 flex items-center gap-3 rounded-lg border-l-[3px] px-3 py-2 text-sm font-bold shadow-sm"
                 href="#"
               >
                 <span className="text-ssm w-4 font-serif opacity-80">02</span>
@@ -67,7 +67,7 @@ export const Aside = () => {
             </li>
             <li>
               <a
-                className="text-text-muted hover:bg-primary/10 hover:text-text-muted flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors"
+                className="text-foreground hover:bg-primary/10 hover:text-foreground flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors"
                 href="#"
               >
                 <span className="text-ssm w-4 font-serif opacity-60">03</span>
@@ -76,7 +76,7 @@ export const Aside = () => {
             </li>
             <li>
               <a
-                className="text-text-muted hover:bg-primary/10 hover:text-text-muted flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors"
+                className="text-foreground hover:bg-primary/10 hover:text-foreground flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors"
                 href="#"
               >
                 <span className="text-ssm w-4 font-serif opacity-60">04</span>
@@ -86,20 +86,20 @@ export const Aside = () => {
           </ul>
         </div>
         <div>
-          <span className="text-text-muted text-ssm tracking-widest-plus px-2 font-bold uppercase">
+          <span className="text-foreground text-ssm tracking-widest-plus px-2 font-bold uppercase">
             Bookmarks
           </span>
           <div className="mt-3 space-y-2">
-            <div className="group hover:border-primary/40 border-card-bg bg-card-bg/40 hover:bg-card-bg/60 cursor-pointer rounded-lg border p-3 shadow-sm transition-all">
+            <div className="group hover:border-primary/40 bg-muted/80 hover:bg-muted/60 cursor-pointer rounded-lg border p-3 shadow-sm transition-all">
               <div className="mb-1 flex items-center justify-between">
-                <span className="text-text-muted text-ssm font-bold">
+                <span className="text-foreground text-ssm font-bold">
                   Page 142
                 </span>
                 <span className="text-primary">
                   <Bookmark size={14} />
                 </span>
               </div>
-              <p className="text-text-muted/80 line-clamp-2 font-serif text-xs leading-relaxed italic">
+              <p className="text-foreground/80 line-clamp-2 font-serif text-xs leading-relaxed italic">
                 "The stars didn't just shine; they hummed a melody only the lost
                 could hear..."
               </p>
@@ -107,12 +107,12 @@ export const Aside = () => {
           </div>
         </div>
       </nav>
-      <div className="border-card-bg bg-bg-main border-t p-4">
+      <div className="border-card bg-background border-t p-4">
         <div className="mb-2 flex items-center justify-between text-[11px] font-bold">
-          <span className="text-text-muted">READING PROGRESS</span>
-          <span className="text-text-muted">42%</span>
+          <span className="text-foreground">READING PROGRESS</span>
+          <span className="text-foreground">42%</span>
         </div>
-        <div className="bg-bgborder-card-bg h-1.5 w-full overflow-hidden rounded-full">
+        <div className="bg-bgborder-card h-1.5 w-full overflow-hidden rounded-full">
           <div className="bg-primary h-full w-[42%] shadow-[0_0_10px_rgba(139,94,60,0.5)]"></div>
         </div>
       </div>

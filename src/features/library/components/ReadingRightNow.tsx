@@ -2,8 +2,8 @@ import { Bookmark, Share } from 'lucide-react';
 
 export const ReadingRightNow = () => {
   return (
-    <aside className="border-border-subtle bg-bg-sidebar hidden w-80 flex-col gap-6 border-l p-6 lg:flex">
-      <h2 className="text-text-main font-serif text-lg font-extrabold">
+    <aside className="border-muted bg-card hidden w-80 flex-col gap-6 border-l p-6 lg:flex">
+      <h2 className="text-foreground font-serif text-lg font-extrabold">
         Reading right now
       </h2>
       <div className="relative aspect-3/4 overflow-hidden rounded-2xl shadow-2xl shadow-black/20">
@@ -22,30 +22,30 @@ export const ReadingRightNow = () => {
       </div>
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <span className="text-text-muted text-sm font-semibold">
+          <span className="text-foreground text-sm font-semibold">
             Progress
           </span>
           <span className="text-primary text-sm font-bold">64%</span>
         </div>
-        <div className="bg-border-subtle h-2 w-full overflow-hidden rounded-full">
+        <div className="bg-muted h-2 w-full overflow-hidden rounded-full">
           <div className="bg-primary h-full w-[64%] rounded-full shadow-[0_0_10px_rgba(212,163,115,0.3)]"></div>
         </div>
-        <p className="text-text-muted text-center text-[11px]">
+        <p className="text-foreground text-center text-[11px]">
           248 of 390 pages read
         </p>
       </div>
       <div className="mt-auto grid grid-cols-2 gap-3">
-        <button className="bg-card-bg hover:bg-primary/5 border-border-subtle hover:border-primary/20 flex cursor-pointer flex-col items-center justify-center rounded-xl border p-4 shadow-sm transition-colors">
+        <button className="bg-card hover:bg-primary/5 border-primary/30 hover:border-primary/20 flex cursor-pointer flex-col items-center justify-center rounded-xl border p-4 shadow-sm transition-colors">
           <span className="text-primary mb-1">
             <Bookmark />
           </span>
-          <span className="text-text-main text-xs font-bold">Add Note</span>
+          <span className="text-foreground text-xs font-bold">Add Note</span>
         </button>
-        <button className="bg-card-bg hover:bg-primary/5 border-border-subtle hover:border-primary/20 flex cursor-pointer flex-col items-center justify-center rounded-xl border p-4 shadow-sm transition-colors">
+        <button className="bg-card hover:bg-primary/5 border-primary/30 hover:border-primary/20 flex cursor-pointer flex-col items-center justify-center rounded-xl border p-4 shadow-sm transition-colors">
           <span className="text-primary mb-1">
             <Share />
           </span>
-          <span className="text-text-main text-xs font-bold">Share</span>
+          <span className="text-foreground text-xs font-bold">Share</span>
         </button>
       </div>
     </aside>
