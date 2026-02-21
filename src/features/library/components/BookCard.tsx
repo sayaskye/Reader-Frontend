@@ -41,7 +41,7 @@ export const BookCard = ({ userBook }: Props) => {
             )}
           </button>
         </div>
-        <button className="text-primary absolute top-3 right-3 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-black/60 shadow-sm backdrop-blur-md transition-colors hover:bg-black/80">
+        <button className="text-primary bg-background/60 hover:bg-background/80 absolute top-3 right-3 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full shadow-sm backdrop-blur-md transition-colors">
           {userBook.isFavorite ? <StarOff size={14} /> : <Star size={14} />}
         </button>
         <div className="absolute top-3 left-3">
