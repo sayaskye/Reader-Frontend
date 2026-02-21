@@ -1,6 +1,6 @@
 import { Library, Quote } from 'lucide-react';
 
-export const AsideForm = () => {
+export const AsideSection = () => {
   return (
     <section className="relative hidden flex-col justify-between overflow-hidden border-r p-12 lg:flex lg:w-5/12 xl:w-1/2">
       <div className="bg-primary/10 absolute -top-24 -left-24 h-96 w-96 rounded-full blur-[100px]"></div>
