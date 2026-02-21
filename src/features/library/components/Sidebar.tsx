@@ -12,8 +12,8 @@ import {
 import { useTheme } from '@/hooks/useTheme';
 
 export const Sidebar = () => {
-  const { applyTheme, theme } = useTheme();
   //TODO: this won't work this way, it is just a place holder
+  const { applyTheme, theme } = useTheme();
   const changeTheme = theme === 'light' ? 'dark' : 'light';
   const navigate = useNavigate();
   return (

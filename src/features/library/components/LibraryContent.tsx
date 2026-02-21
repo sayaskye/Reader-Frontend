@@ -1,17 +1,21 @@
 import { BookOpenText, Grid2x2, List, Play, Star, StarOff } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useGetBooks } from '@/features/library/hooks';
 
 export const LibraryContent = () => {
   const navigate = useNavigate();
+  const queryBooks = useGetBooks();
+  console.log(queryBooks.data);
   return (
     <div className="custom-scrollbar flex-1 overflow-y-auto p-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-foreground font-serif text-3xl font-extrabold tracking-tight">
-            Your Library
+            {queryBooks.data ? 'Your library' : 'Loaging library'}
           </h1>
           <p className="text-foreground mt-1 text-sm">
-            248 books in total • 12 currently being read
+            {queryBooks.data?.length ?? 0} books in total •{' '}
+            {queryBooks.data?.length ?? 0} currently being read
           </p>
         </div>
         <div className="bg-secondary border-muted flex rounded-lg border p-1">

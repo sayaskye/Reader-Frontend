@@ -11,3 +11,4 @@ export function createEntityKeys<TFilters = Record<string, unknown>>(
 }
 
 export const authKeys = createEntityKeys('auth');
+export const booksKeys = createEntityKeys('books');
