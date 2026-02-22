@@ -49,7 +49,21 @@ export class readerService {
       }
     }
 
-    return { metadata, coverUrl, coverBlob, opfDoc, zip };
+    const spineIds = Array.from(opfDoc.querySelectorAll('spine itemref')).map(
+      (item) => item.getAttribute('idref'),
+    );
+    const manifest = Array.from(opfDoc.querySelectorAll('manifest item'));
+    const readingOrder = spineIds.map((id) => {
+      const item = manifest.find((m) => m.getAttribute('id') === id);
+      return item?.getAttribute('href');
+    });
+    const order = {
+      spineIds,
+      manifest,
+      readingOrder,
+    };
+
+    return { metadata, coverUrl, coverBlob, opfPath, opfDoc, zip, order };
   }
 
   private static resolveZipPath(opfPath: string, href: string): string {
