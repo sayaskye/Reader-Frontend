@@ -59,7 +59,6 @@ api.interceptors.response.use(
       if (typeof window !== 'undefined') {
         window.location.href = '/login?expired=true';
       }
-
       return Promise.reject(refreshError);
     } finally {
       isRefreshing = false;
