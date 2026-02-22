@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import {
   ArrowBigLeftDashIcon,
   ChevronLeft,
@@ -8,8 +10,64 @@ import {
   Sparkles,
   Volume2,
 } from 'lucide-react';
+import { useBookToLocal, useGetBooks } from '@/features/library/hooks';
+import { readerService } from '../services/reader';
 
 export const Content = () => {
+  const { id } = useParams<{ id: string }>();
+  const [epub, setEpub] = useState<any>(null);
+  const { loadBook, isLoading, error, currentBlob } = useBookToLocal();
+  const { data: userBooks } = useGetBooks();
+
+  useEffect(() => {
+    const currentBook = userBooks?.find((b) => b.book.id === id)?.book;
+
+    if (currentBook) {
+      loadBook({
+        ...currentBook,
+      });
+    }
+  }, [id, userBooks]);
+
+  useEffect(() => {
+    const initialize = async () => {
+      if (currentBlob) {
+        const data = await readerService.extractEpubData(currentBlob);
+        setEpub(data);
+
+        // Test, number = chaper
+        await renderChapter(data, 7);
+      }
+    };
+    initialize();
+  }, [currentBlob]);
+
+  const renderChapter = async (epub: any, chapterIndex: number) => {
+    const { zip, opfPath, order } = epub;
+    const chapterHref = order.readingOrder[chapterIndex];
+
+    if (!chapterHref) return;
+    const fullPath = readerService.resolveZipPath(opfPath, chapterHref);
+    const htmlContent = await zip.file(fullPath)?.async('string');
+
+    if (htmlContent) {
+      const blob = new Blob([htmlContent], { type: 'text/html' });
+      const chapterUrl = URL.createObjectURL(blob);
+      const iframe = document.getElementById(
+        'epub-reader-frame',
+      ) as HTMLIFrameElement;
+      if (iframe) {
+        if (iframe.src.startsWith('blob:')) {
+          URL.revokeObjectURL(iframe.src);
+        }
+        iframe.src = chapterUrl;
+      }
+    }
+  };
+
+  if (isLoading) return <div>Loading book content...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
   return (
     <main className="custom-scrollbar bg-background relative flex flex-1 flex-col overflow-y-auto">
       <div className="toolbar-hover-zone group absolute top-0 right-0 left-0 z-30 h-24">
@@ -37,6 +95,11 @@ export const Content = () => {
       </div>
       {/*  */}
       <div className="text-foreground mx-auto max-w-2xl flex-1 px-12 py-32 font-serif text-lg leading-[1.9] select-text">
+        <iframe
+          id="epub-reader-frame"
+          title="Epub Reader"
+          style={{ width: '100%', height: '600px', border: 'none' }}
+        />
         <h2 className="text-primary mb-12 text-4xl font-bold tracking-tight">
           The Silent Observatory
         </h2>

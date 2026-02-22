@@ -1,12 +1,13 @@
 import { useState, useCallback, useEffect } from 'react';
 import { indexdbService } from '@/services';
 
-interface UseBookLoaderReturn {
+interface UseBookToLocalReturn {
   isLoading: boolean;
   downloadProgress: number;
   error: Error | null;
   loadBook: (bookData: BookData) => Promise<string | null>;
   currentUrl: string | null;
+  currentBlob: Blob | null;
 }
 
 interface BookData {
@@ -16,11 +17,12 @@ interface BookData {
   [key: string]: any;
 }
 
-export const useBookToLocal = (): UseBookLoaderReturn => {
+export const useBookToLocal = (): UseBookToLocalReturn => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [downloadProgress, setDownloadProgress] = useState<number>(0);
   const [error, setError] = useState<Error | null>(null);
   const [currentUrl, setCurrentUrl] = useState<string | null>(null);
+  const [currentBlob, setCurrentBlob] = useState<Blob | null>(null);
 
   const cleanup = useCallback(() => {
     if (currentUrl) {
@@ -41,6 +43,7 @@ export const useBookToLocal = (): UseBookLoaderReturn => {
         if (localBook && localBook.fileHash === bookData.fileHash) {
           setDownloadProgress(100);
           const url = URL.createObjectURL(localBook.fileBlob);
+          setCurrentBlob(localBook.fileBlob);
           cleanup();
           setCurrentUrl(url);
           setIsLoading(false);
@@ -89,6 +92,7 @@ export const useBookToLocal = (): UseBookLoaderReturn => {
         });
 
         const newUrl = URL.createObjectURL(fileBlob);
+        setCurrentBlob(fileBlob);
         cleanup();
         setCurrentUrl(newUrl);
         setIsLoading(false);
@@ -108,5 +112,12 @@ export const useBookToLocal = (): UseBookLoaderReturn => {
     return () => cleanup();
   }, [cleanup]);
 
-  return { isLoading, downloadProgress, error, loadBook, currentUrl };
+  return {
+    isLoading,
+    downloadProgress,
+    error,
+    loadBook,
+    currentUrl,
+    currentBlob,
+  };
 };

@@ -66,7 +66,7 @@ export class readerService {
     return { metadata, coverUrl, coverBlob, opfPath, opfDoc, zip, order };
   }
 
-  private static resolveZipPath(opfPath: string, href: string): string {
+  static resolveZipPath(opfPath: string, href: string): string {
     const basePath = opfPath.split('/').slice(0, -1);
     const hrefParts = href.split('/');
     const finalPath = [...basePath];
