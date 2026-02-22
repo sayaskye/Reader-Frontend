@@ -14,6 +14,11 @@ const dbPromise = openDB(DB_NAME, VERSION, {
 });
 
 export const indexdbService = {
+  getBook: async (id: string): Promise<any | null> => {
+    const db = await dbPromise;
+    return await db.get(STORE_NAME, id);
+  },
+
   saveBook: async ({
     id,
     fileBlob,
@@ -30,21 +35,6 @@ export const indexdbService = {
     } catch (error) {
       console.error('Error while saving in IndexedDB:', error);
       throw error;
-    }
-  },
-
-  getBookUrl: async (id: string): Promise<string | null> => {
-    try {
-      const db = await dbPromise;
-      const book = await db.get(STORE_NAME, id);
-
-      if (book && book.fileBlob) {
-        return URL.createObjectURL(book.fileBlob);
-      }
-      return null;
-    } catch (error) {
-      console.error('Error owhile fetching book from IndexedDB:', error);
-      return null;
     }
   },
 

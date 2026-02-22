@@ -1,9 +1,19 @@
 import { Grid2x2, List } from 'lucide-react';
-import { useGetBooks } from '@/features/library/hooks';
+
+import { useGetBooks, useBookToLocal } from '@/features/library/hooks';
 import { BookCard } from '@/features/library/components/BookCard';
+
+import type { UserBook } from '../types/book';
 
 export const LibraryContent = () => {
   const queryBooks = useGetBooks();
+  const { loadBook, isLoading, downloadProgress } = useBookToLocal();
+
+  const handleDownload = async (book: UserBook) => {
+    //TODO: if not loaded, disable ready to read button and do a correct sync status badge
+    await loadBook({ ...book.book });
+  };
+
   return (
     <div className="custom-scrollbar flex-1 overflow-y-auto p-8">
       <div className="mb-8 flex items-center justify-between">
@@ -28,7 +38,10 @@ export const LibraryContent = () => {
       {/* //TODO: fix responsive */}
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7">
         {queryBooks.data?.map((ub) => (
-          <BookCard userBook={ub} key={ub.id} />
+          <div onClick={() => handleDownload(ub)} key={ub.id}>
+            {isLoading ? downloadProgress : 'Read Book'}
+            <BookCard userBook={ub} />
+          </div>
         ))}
       </div>
       <div className="mt-12 flex justify-center pb-8">
