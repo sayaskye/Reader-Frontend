@@ -13,6 +13,7 @@ dist-ssr
 *.local
 .env
 stitch
+dev-dist
 
 # Editor directories and files
 !.vscode/extensions.json

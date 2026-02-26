@@ -67,13 +67,22 @@ export class readerService {
   }
 
   static resolveZipPath(opfPath: string, href: string): string {
-    const basePath = opfPath.split('/').slice(0, -1);
-    const hrefParts = href.split('/');
-    const finalPath = [...basePath];
+    const cleanHref = href.split('#')[0].split('?')[0];
+    const decodedHref = decodeURIComponent(cleanHref);
+    const baseParts = opfPath.split('/').slice(0, -1);
+    const hrefParts = decodedHref.split('/');
+    const finalParts = [...baseParts];
     for (const part of hrefParts) {
-      if (part === '..') finalPath.pop();
-      else if (part !== '.' && part !== '') finalPath.push(part);
+      if (part === '..') {
+        finalParts.pop();
+      } else if (part !== '.' && part !== '') {
+        finalParts.push(part);
+      }
     }
-    return finalPath.join('/');
+    return finalParts.join('/');
+  }
+
+  static toEpubUrl(bookId: string, zipPath: string) {
+    return `/epub-content/${bookId}/${zipPath}`;
   }
 }
