@@ -6,7 +6,7 @@ interface UseBookToLocalReturn {
   downloadProgress: number;
   error: Error | null;
   loadBook: (bookData: BookData) => Promise<string | null>;
-  isBookDownloaded: (bookId: string) => Promise<boolean>; // Nueva función
+  isBookDownloaded: (bookId: string) => Promise<boolean>;
   currentUrl: string | null;
   currentBlob: Blob | null;
 }

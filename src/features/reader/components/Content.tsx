@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   ArrowBigLeftDashIcon,
@@ -7,110 +6,44 @@ import {
   Search,
   Settings,
 } from 'lucide-react';
-import DOMPurify from 'dompurify';
-
-import { useBookToLocal, useGetBooks } from '@/features/library/hooks';
-import { readerService } from '../services/reader';
+import { useReader } from '@/features/reader/hooks';
+import { getChapterTitle } from '@/lib/normalize-title';
 
 export const Content = () => {
   const { id } = useParams<{ id: string }>();
-  if (!id) return null;
-  const [epub, setEpub] = useState<any>(null);
-  const [htmlChapter, setHtmlChapter] = useState<any>(null);
-  const [currentChapter, setCurrentChapter] = useState(0);
-  const { loadBook, isLoading, error, currentBlob } = useBookToLocal();
-  const { data: userBooks } = useGetBooks();
-
-  useEffect(() => {
-    const currentBook = userBooks?.find((b) => b.book.id === id)?.book;
-
-    if (currentBook) {
-      loadBook({
-        ...currentBook,
-      });
+  const {
+    isLoading,
+    error,
+    htmlChapter,
+    currentChapter,
+    currentChapterTitle,
+    hasPrevPage,
+    handlePrev,
+    totalChapters,
+    hasNextPage,
+    handleNext,
+    scrollRef,
+    goToChapterByHref,
+  } = useReader(id);
+  const handleInternalClick = (e: React.MouseEvent) => {
+    const target = (e.target as HTMLElement).closest('a[data-epub-link]');
+    if (target) {
+      e.preventDefault();
+      const destination = target.getAttribute('data-epub-link');
+      if (destination) {
+        goToChapterByHref(destination);
+      }
     }
-  }, [id, userBooks]);
-
-  useEffect(() => {
-    const initialize = async () => {
-      if (currentBlob) {
-        const data = await readerService.extractEpubData(currentBlob);
-        setEpub(data);
-      }
-    };
-    initialize();
-  }, [currentBlob]);
-
-  useEffect(() => {
-    const chapterChange = async (chapter: number) => {
-      if (!epub) return;
-      const registration = await navigator.serviceWorker.ready;
-      if (!navigator.serviceWorker.controller) {
-        await new Promise((resolve) => setTimeout(resolve, 100));
-      }
-
-      const worker = navigator.serviceWorker.controller || registration.active;
-
-      if (worker) {
-        worker.postMessage({ type: 'SET_BOOK', bookId: id });
-        /* await new Promise((resolve) => setTimeout(resolve, 50)); */
-      }
-
-      await renderChapter(epub, chapter, id);
-    };
-
-    chapterChange(currentChapter);
-  }, [currentChapter, id, epub]);
-
-  const renderChapter = async (
-    epub: any,
-    chapterIndex: number,
-    bookId: string,
-  ) => {
-    const { zip, opfPath, order } = epub;
-    const chapterHref = order.readingOrder[chapterIndex];
-
-    if (!chapterHref) return;
-    const fullPath = readerService.resolveZipPath(opfPath, chapterHref);
-    const htmlContent = await zip.file(fullPath)?.async('string');
-    const cleanHtml = DOMPurify.sanitize(htmlContent);
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(cleanHtml, 'text/html');
-    doc
-      .querySelectorAll("style, link[rel='stylesheet']")
-      .forEach((el) => el.remove());
-    doc
-      .querySelectorAll('[style]')
-      .forEach((el) => el.removeAttribute('style'));
-
-    doc.querySelectorAll('img').forEach((img) => {
-      const src = img.getAttribute('src');
-      if (!src) return;
-      const zipPath = readerService.resolveZipPath(fullPath, src);
-      img.setAttribute('src', `/epub-content/${bookId}/${zipPath}`);
-    });
-
-    doc.querySelectorAll('a[href]').forEach((a) => {
-      const href = a.getAttribute('href');
-      if (!href) return;
-      if (href.startsWith('http')) return;
-      const resolved = readerService.resolveZipPath(fullPath, href);
-      a.setAttribute('href', resolved);
-    });
-    doc.querySelectorAll('font, center').forEach((el) => el.remove());
-    const normalizedHtml = doc.body.innerHTML;
-    setHtmlChapter(normalizedHtml);
   };
-
   if (isLoading) return <div>Loading book content...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  function createMarkup() {
-    return { __html: htmlChapter };
-  }
-
   return (
-    <main className="custom-scrollbar bg-background relative flex flex-1 flex-col overflow-y-auto">
+    <main
+      className="custom-scrollbar bg-background relative flex flex-1 flex-col overflow-y-auto"
+      onClick={handleInternalClick}
+      ref={scrollRef}
+    >
       <div className="toolbar-hover-zone group absolute top-0 right-0 left-0 z-30 h-24">
         <div className="toolbar-container -translate-y-4 p-6 opacity-0 transition-all duration-300 ease-out">
           <div className="bg-card border-t-primary/95 border-foreground mx-auto flex max-w-4xl items-center justify-between rounded-xl border px-6 py-3 shadow-sm backdrop-blur-sm">
@@ -120,7 +53,7 @@ export const Content = () => {
               </button>
               <div className="bg-foreground mx-2 h-6 w-px"></div>
               <span className="text-primary font-serif text-sm font-bold opacity-80">
-                Chapter 2: The Silent Observatory
+                {getChapterTitle(currentChapterTitle)}
               </span>
             </div>
             <div className="flex items-center gap-2">
@@ -134,32 +67,39 @@ export const Content = () => {
           </div>
         </div>
       </div>
-      {/*  */}
+
       <div className="text-foreground mx-auto max-w-5xl flex-1 px-12 pt-10 font-serif text-lg leading-[1.9] select-text">
-        {
-          <div
-            dangerouslySetInnerHTML={createMarkup()}
-            className="prose prose-reader prose-lg prose-a:no-underline prose-headings:text-primary prose-headings:mb-12 prose-headings:text-4xl prose-headings:font-bold prose-p:mb-8 prose-p:ndent-8 max-w-none"
-          />
-        }
+        <div
+          dangerouslySetInnerHTML={{ __html: htmlChapter }}
+          className="prose prose-reader prose-lg prose-a:no-underline prose-headings:text-primary prose-headings:mb-12 prose-headings:text-4xl prose-headings:font-bold prose-p:mb-8 prose-p:ndent-8 max-w-none"
+        />
       </div>
-      {/*  */}
+
       <div className="bg-card border-primary/90 fixed bottom-8 left-1/2 z-10 flex -translate-x-1/2 items-center gap-6 rounded-full border px-6 py-3 shadow-sm backdrop-blur-md">
+        {/* Botón Prev */}
         <button
-          className="text-primary hover:text-accent flex cursor-pointer items-center gap-2 transition-colors"
-          onClick={() => setCurrentChapter(currentChapter - 1)}
+          className={`text-primary flex cursor-pointer items-center gap-2 transition-colors ${
+            !hasPrevPage && 'pointer-events-none cursor-not-allowed opacity-30'
+          }`}
+          onClick={handlePrev}
         >
           <ChevronLeft />
           <span className="text-xs font-bold tracking-widest uppercase">
             Prev
           </span>
         </button>
+
+        {/* Indicador de progreso */}
         <div className="text-primary text-ssm bg-muted rounded-full px-3 py-1 font-mono font-bold">
-          Chapter {currentChapter}
+          {currentChapter + 1} / {totalChapters}
         </div>
+
+        {/* Botón Next */}
         <button
-          className="text-primary hover:text-accent flex cursor-pointer items-center gap-2 transition-colors"
-          onClick={() => setCurrentChapter(currentChapter + 1)}
+          className={`text-primary flex cursor-pointer items-center gap-2 transition-colors ${
+            !hasNextPage && 'pointer-events-none cursor-not-allowed opacity-30'
+          }`}
+          onClick={handleNext}
         >
           <span className="text-xs font-bold tracking-widest uppercase">
             Next
