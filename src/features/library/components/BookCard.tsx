@@ -1,6 +1,8 @@
 import { BookOpenText, Play, Star, StarOff } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+import { useToggleFavorite } from '@/features/library/hooks';
+
 import { formatRelativeTime } from '@/lib/time-ago';
 import { normalizeAuthors } from '@/lib/normalize-authors';
 
@@ -15,6 +17,10 @@ export const BookCard = ({ userBook }: Props) => {
   const book = userBook.book;
   const lastRead = formatRelativeTime(userBook.lastReadAt);
   const authors = normalizeAuthors(book.author) || book.author;
+  const toggleFavMutation = useToggleFavorite();
+  const toggleFav = (bookId: string) => {
+    toggleFavMutation.mutate(bookId);
+  };
 
   return (
     <div className="group bg-card border-muted hover:border-primary/50 hover:shadow-primary/5 relative transform overflow-hidden rounded-xl border shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
@@ -42,7 +48,10 @@ export const BookCard = ({ userBook }: Props) => {
             )}
           </button>
         </div>
-        <button className="text-primary bg-background/60 hover:bg-background/80 absolute top-3 right-3 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full shadow-sm backdrop-blur-md transition-colors">
+        <button
+          onClick={() => toggleFav(book.id)}
+          className="text-primary bg-background/60 hover:bg-background/80 absolute top-3 right-3 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full shadow-sm backdrop-blur-md transition-colors"
+        >
           {userBook.isFavorite ? <StarOff size={14} /> : <Star size={14} />}
         </button>
         <div className="absolute top-3 left-3">

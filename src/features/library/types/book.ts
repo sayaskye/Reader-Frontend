@@ -1,3 +1,16 @@
+export interface GetBooksParams {
+  page?: number;
+  limit?: number;
+  search?: string;
+  [key: string]: unknown;
+}
+
+export interface PaginatedUserBooks {
+  page: number;
+  limit: number;
+  data: UserBook[];
+}
+
 export interface UserBooks {
   userBooks: UserBook[];
 }

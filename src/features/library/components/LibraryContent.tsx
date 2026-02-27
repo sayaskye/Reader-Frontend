@@ -6,7 +6,8 @@ import { BookCard } from '@/features/library/components/BookCard';
 import type { UserBook } from '../types/book';
 
 export const LibraryContent = () => {
-  const queryBooks = useGetBooks();
+  const queryBooks = useGetBooks({ limit: 20, page: 1 });
+  const data = queryBooks?.data?.data;
   const { loadBook, isLoading, downloadProgress } = useBookToLocal();
 
   const handleDownload = async (book: UserBook) => {
@@ -19,11 +20,11 @@ export const LibraryContent = () => {
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-foreground font-serif text-3xl font-extrabold tracking-tight">
-            {queryBooks.data ? 'Your library' : 'Loaging library'}
+            {data ? 'Your library' : 'Loaging library'}
           </h1>
           <p className="text-foreground mt-1 text-sm">
-            {queryBooks.data?.length ?? 0} books in total •{' '}
-            {queryBooks.data?.length ?? 0} currently being read
+            {data?.length ?? 0} books in total • {data?.length ?? 0} currently
+            being read
           </p>
         </div>
         <div className="bg-secondary border-muted flex rounded-lg border p-1">
@@ -37,9 +38,11 @@ export const LibraryContent = () => {
       </div>
       {/* //TODO: fix responsive */}
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7">
-        {queryBooks.data?.map((ub) => (
-          <div onClick={() => handleDownload(ub)} key={ub.id}>
-            {isLoading ? downloadProgress : 'Read Book'}
+        {data?.map((ub) => (
+          <div key={ub.id}>
+            <div onClick={() => handleDownload(ub)}>
+              {isLoading ? `Progress ${downloadProgress}%` : 'Download book'}
+            </div>
             <BookCard userBook={ub} />
           </div>
         ))}
