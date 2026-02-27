@@ -1,5 +1,8 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-
+import {
+  useMutation,
+  useQueryClient,
+  type InfiniteData,
+} from '@tanstack/react-query';
 import { booksKeys } from '@/lib/tanstack';
 import { booksService } from '@/features/library/services';
 import type { PaginatedUserBooks } from '@/features/library/types/book';
@@ -11,18 +14,26 @@ export const useToggleFavorite = () => {
     mutationFn: (bookId: string) => booksService.toggleFav(bookId),
     onMutate: async (bookId) => {
       await queryClient.cancelQueries({ queryKey: booksKeys.lists() });
-      const previousQueries = queryClient.getQueriesData<PaginatedUserBooks>({
+      const previousQueries = queryClient.getQueriesData<
+        InfiniteData<PaginatedUserBooks>
+      >({
         queryKey: booksKeys.lists(),
       });
-      queryClient.setQueriesData<PaginatedUserBooks>(
+
+      queryClient.setQueriesData<InfiniteData<PaginatedUserBooks>>(
         { queryKey: booksKeys.lists() },
         (old) => {
           if (!old) return old;
           return {
             ...old,
-            data: old.data.map((ub) =>
-              ub.bookId === bookId ? { ...ub, isFavorite: !ub.isFavorite } : ub,
-            ),
+            pages: old.pages.map((page) => ({
+              ...page,
+              data: page.data.map((ub) =>
+                ub.bookId === bookId
+                  ? { ...ub, isFavorite: !ub.isFavorite }
+                  : ub,
+              ),
+            })),
           };
         },
       );
@@ -34,8 +45,8 @@ export const useToggleFavorite = () => {
         queryClient.setQueryData(queryKey, oldData);
       });
     },
-    onSettled: () => {
+    /* onSettled: () => {
       queryClient.invalidateQueries({ queryKey: booksKeys.lists() });
-    },
+    }, */
   });
 };

@@ -8,6 +8,8 @@ export interface GetBooksParams {
 export interface PaginatedUserBooks {
   page: number;
   limit: number;
+  totalCount: number;
+  hasNextPage: boolean;
   data: UserBook[];
 }
 

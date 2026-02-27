@@ -9,7 +9,7 @@ import {
   MoonStar,
   Sun,
 } from 'lucide-react';
-import { useTheme } from '@/hooks/useTheme';
+import { useTheme } from '@/hooks';
 
 export const Sidebar = () => {
   //TODO: this won't work this way, it is just a place holder
