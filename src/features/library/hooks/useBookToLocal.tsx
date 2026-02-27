@@ -6,6 +6,7 @@ interface UseBookToLocalReturn {
   downloadProgress: number;
   error: Error | null;
   loadBook: (bookData: BookData) => Promise<string | null>;
+  isBookDownloaded: (bookId: string) => Promise<boolean>; // Nueva función
   currentUrl: string | null;
   currentBlob: Blob | null;
 }
@@ -31,6 +32,14 @@ export const useBookToLocal = (): UseBookToLocalReturn => {
     }
   }, [currentUrl]);
 
+  const isBookDownloaded = useCallback(
+    async (bookId: string): Promise<boolean> => {
+      const book = await indexdbService.getBook(bookId);
+      return !!book;
+    },
+    [],
+  );
+
   const loadBook = useCallback(
     async (bookData: BookData): Promise<string | null> => {
       setIsLoading(true);
@@ -51,7 +60,6 @@ export const useBookToLocal = (): UseBookToLocalReturn => {
         }
 
         const response = await fetch(bookData.url);
-
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
 
@@ -66,9 +74,7 @@ export const useBookToLocal = (): UseBookToLocalReturn => {
 
         while (true) {
           const { done, value } = await reader.read();
-
           if (done) break;
-
           chunks.push(value);
           loaded += value.length;
 
@@ -78,8 +84,9 @@ export const useBookToLocal = (): UseBookToLocalReturn => {
           }
         }
 
-        //@ts-ignore TODO: remove this ts-ignore
-        const fileBlob = new Blob(chunks, { type: 'application/epub+zip' });
+        const fileBlob = new Blob(chunks as unknown as BlobPart[], {
+          type: 'application/epub+zip',
+        });
 
         const { url: remoteUrl, ...metadata } = bookData;
         await indexdbService.saveBook({
@@ -117,6 +124,7 @@ export const useBookToLocal = (): UseBookToLocalReturn => {
     downloadProgress,
     error,
     loadBook,
+    isBookDownloaded,
     currentUrl,
     currentBlob,
   };
