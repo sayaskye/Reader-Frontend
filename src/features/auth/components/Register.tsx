@@ -1,8 +1,8 @@
 import { Library } from 'lucide-react';
-import LoginForm from './LogInForm';
+import RegisterForm from './RegisterForm';
 import { useNavigate } from 'react-router-dom';
 
-export const Login = () => {
+export const Register = () => {
   const navigate = useNavigate();
   return (
     <main className="bg-background flex flex-1 flex-col items-center justify-center p-6 lg:p-12 xl:p-24">
@@ -28,24 +28,24 @@ export const Login = () => {
           </p>
         </div>
         <div className="bg-card border-primary/5 flex rounded-lg border p-1">
-          <button className="shadow-primary/5 text-primary bg-primary/20 flex-1 rounded-md py-2.5 text-sm font-semibold shadow-sm ring-1 ring-black/5 transition-all">
-            Sign In
-          </button>
           <button
             className="text-secondary-foreground hover:bg-secondary/20 flex-1 cursor-pointer rounded-md py-2.5 text-sm font-semibold transition-all"
-            onClick={() => navigate('/register')}
+            onClick={() => navigate('/login')}
           >
+            Sign In
+          </button>
+          <button className="shadow-primary/5 text-primary bg-primary/20 flex-1 rounded-md py-2.5 text-sm font-semibold shadow-sm ring-1 ring-black/5 transition-all">
             Register
           </button>
         </div>
-        <LoginForm />
+        <RegisterForm />
         <p className="text-foreground text-center text-sm">
-          New to the library?
+          Already have an account?
           <button
             className="text-primary hover:text-primary ml-1 cursor-pointer font-bold underline-offset-4 hover:underline"
-            onClick={() => navigate('/register')}
+            onClick={() => navigate('/login')}
           >
-            Create an account
+            Sing in
           </button>
         </p>
       </div>

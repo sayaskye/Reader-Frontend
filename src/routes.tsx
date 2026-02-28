@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 
-import { Library, Reader, NotFoundPage, Login } from '@/pages';
+import { Library, Reader, NotFoundPage, Login, Register } from '@/pages';
 import { AuthGuard } from '@/features/auth/components';
 
 export const router = createBrowserRouter([
@@ -12,10 +12,10 @@ export const router = createBrowserRouter([
     path: '/login',
     element: <Login />,
   },
-  /* {
-    path: "/register",
+  {
+    path: '/register',
     element: <Register />,
-  }, */
+  },
   {
     element: <AuthGuard />,
     children: [

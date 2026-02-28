@@ -1,4 +1,3 @@
-import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface EmptyLibraryProps {
@@ -24,10 +23,10 @@ export const EmptyLibrary = ({ onClearFilters }: EmptyLibraryProps) => {
         >
           Clear filters
         </Button>
-        <Button className="bg-primary text-background hover:bg-primary/90 shadow-primary/20 cursor-pointer rounded-xl px-6 font-bold shadow-lg">
+        {/* <Button className="bg-primary text-background hover:bg-primary/90 shadow-primary/20 cursor-pointer rounded-xl px-6 font-bold shadow-lg">
           <Plus size={16} className="mr-2" />
           Add Book
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
