@@ -1,11 +1,22 @@
 import { Grid2x2, List } from 'lucide-react';
 import { useInfiniteScroll } from '@/hooks';
-import { useGetBooks } from '@/features/library/hooks';
+import { useGetBooks, type LibraryFilters } from '@/features/library/hooks';
 import { DownloadableBookCard } from '@/features/library/components';
+import { EmptyLibrary } from './EmptyLibrary';
 
-export const LibraryContent = () => {
-  const queryBooks = useGetBooks({ limit: 20 });
+interface LibraryContentProps {
+  filters: LibraryFilters;
+  onResetFilters: () => void;
+}
+
+export const LibraryContent = ({
+  filters,
+  onResetFilters,
+}: LibraryContentProps) => {
+  const queryBooks = useGetBooks({ ...filters, limit: 20 });
   const allBooks = queryBooks.data?.pages.flatMap((page) => page.data) ?? [];
+  const isUpdating = queryBooks.isPlaceholderData;
+  const isEmpty = allBooks.length === 0 && !queryBooks.isLoading;
 
   const { loadMoreRef } = useInfiniteScroll({
     hasNextPage: queryBooks.hasNextPage,
@@ -14,11 +25,13 @@ export const LibraryContent = () => {
   });
 
   return (
-    <div className="custom-scrollbar flex-1 overflow-y-auto p-8">
+    <div
+      className={`custom-scrollbar flex-1 overflow-y-auto p-8 transition-opacity ${isUpdating ? 'opacity-50' : 'opacity-100'}`}
+    >
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-foreground font-serif text-3xl font-extrabold tracking-tight">
-            {queryBooks.isLoading ? 'Loading library' : 'Your library'}
+            Your library
           </h1>
           <p className="text-foreground mt-1 text-sm">
             {allBooks.length} books in total
@@ -34,11 +47,15 @@ export const LibraryContent = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7">
-        {allBooks.map((ub) => (
-          <DownloadableBookCard key={ub.id} ub={ub} />
-        ))}
-      </div>
+      {isEmpty ? (
+        <EmptyLibrary onClearFilters={onResetFilters} />
+      ) : (
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7">
+          {allBooks.map((ub) => (
+            <DownloadableBookCard key={ub.id} ub={ub} />
+          ))}
+        </div>
+      )}
 
       <div
         ref={loadMoreRef}
