@@ -60,8 +60,10 @@ export const StickToTop = ({ controls, isFetching }: StickToTopProps) => {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Status</SelectItem>
+            <SelectItem value="to-read">To Read</SelectItem>
             <SelectItem value="reading">Reading</SelectItem>
-            <SelectItem value="finished">Finished</SelectItem>
+            <SelectItem value="completed">Completed</SelectItem>
+            <SelectItem value="on-hold">On Hold</SelectItem>
           </SelectContent>
         </Select>
 
