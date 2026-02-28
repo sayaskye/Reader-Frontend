@@ -1,4 +1,3 @@
-import { Grid2x2, List } from 'lucide-react';
 import { useInfiniteScroll } from '@/hooks';
 import { DownloadableBookCard } from '@/features/library/components';
 import { EmptyLibrary } from './EmptyLibrary';
@@ -36,14 +35,14 @@ export const LibraryContent = ({
             {allBooks.length} books in total
           </p>
         </div>
-        <div className="bg-secondary border-muted flex rounded-lg border p-1">
+        {/* <div className="bg-secondary border-muted flex rounded-lg border p-1">
           <button className="bg-card text-primary rounded-md p-2 shadow-sm">
             <Grid2x2 size={14} />
           </button>
           <button className="text-foreground hover:text-primary p-2 transition-colors">
             <List size={14} />
           </button>
-        </div>
+        </div> */}
       </div>
 
       {isEmpty ? (
