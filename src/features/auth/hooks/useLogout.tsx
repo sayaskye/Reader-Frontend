@@ -1,22 +1,20 @@
-import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
-import { authKeys } from '@/lib/tanstack';
-import { authService } from '@/features/auth/services';
+import { useNavigate } from 'react-router-dom';
+import { authService } from '@/features/auth/services/auth';
 
 export const useLogout = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationKey: authKeys.all,
-    mutationFn: () => authService.logout(),
-    onSuccess: (data) => {
-      navigate('/login');
-      queryClient.resetQueries();
-      console.log('Successful logout', data);
+    mutationFn: authService.logout,
+    onSuccess: () => {
+      queryClient.clear();
+      navigate('/login', { replace: true });
     },
     onError: (error) => {
-      console.error('Error on logout', error);
+      console.error('Logout failed:', error);
+      navigate('/login');
     },
   });
 };
