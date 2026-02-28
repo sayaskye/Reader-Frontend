@@ -1,6 +1,6 @@
 import { normalizeAuthors } from '@/lib/normalize-authors';
 import { getChapterTitle } from '@/lib/normalize-title';
-import { Bookmark, Library } from 'lucide-react';
+import { Library } from 'lucide-react';
 import { useNavigate } from 'react-router';
 
 interface EpubData {
@@ -112,7 +112,7 @@ export const Aside = ({
             })}
           </ul>
         </div>
-        <div>
+        {/* <div>
           <span className="text-foreground text-ssm tracking-widest-plus px-2 font-bold uppercase">
             Bookmarks
           </span>
@@ -132,7 +132,7 @@ export const Aside = ({
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
       </nav>
 
       <div className="border-card bg-background border-t p-4">

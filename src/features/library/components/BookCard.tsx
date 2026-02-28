@@ -18,6 +18,11 @@ export const BookCard = ({ userBook }: Props) => {
   const lastRead = formatRelativeTime(userBook.lastReadAt);
   const authors = normalizeAuthors(book.author) || book.author;
   const toggleFavMutation = useToggleFavorite();
+  const totalPages = userBook.totalPages ?? 0;
+  const progress =
+    totalPages > 0
+      ? Math.round(((userBook.lastPosition + 1) / totalPages) * 100)
+      : 0;
   const toggleFav = (bookId: string) => {
     toggleFavMutation.mutate(bookId);
   };
@@ -69,12 +74,15 @@ export const BookCard = ({ userBook }: Props) => {
         </p>
         <div className="text-foreground text-ssm mt-3 flex items-center justify-between font-semibold tracking-tight uppercase">
           {lastRead ? <span>Last read: {lastRead}</span> : null}
-          <span className="text-primary font-bold">64%</span>
+          <span className="text-primary font-bold">{progress}%</span>
         </div>
       </div>
       {/* Progress bar */}
       <div className="bg-muted h-1 w-full overflow-hidden">
-        <div className="bg-primary h-full w-2/3"></div>
+        <div
+          className="bg-primary h-full"
+          style={{ width: `${progress}%` }}
+        ></div>
       </div>
     </div>
   );

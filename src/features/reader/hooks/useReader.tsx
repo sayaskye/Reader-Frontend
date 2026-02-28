@@ -4,6 +4,7 @@ import { useShallow } from 'zustand/react/shallow';
 import { useBookToLocal, useGetBooks } from '@/features/library/hooks';
 import { readerService } from '../services/reader';
 import { readerStore } from '@/store/reader';
+import { useUpdateBook } from './useUserBookUpdate';
 
 export const useReader = (id: string | undefined) => {
   const [epub, setEpub] = useState<any>(null);
@@ -23,6 +24,10 @@ export const useReader = (id: string | undefined) => {
 
   const { loadBook, isLoading, error, currentBlob } = useBookToLocal();
   const { data } = useGetBooks({ limit: 20 });
+
+  const userBookId = data?.pages
+    .flatMap((page) => page.data)
+    .find((ub) => ub.bookId === id || ub.book.id === id)?.id;
 
   const currentBookData = data?.pages
     .flatMap((page) => page.data)
@@ -97,6 +102,30 @@ export const useReader = (id: string | undefined) => {
     chapterChange(currentChapter);
   }, [currentChapter, id, epub]);
 
+  //Waits 3 seconds, then updates the book
+  const { mutate: updateProgress } = useUpdateBook();
+
+  useEffect(() => {
+    if (!userBookId || totalSpineItems <= 0) return;
+
+    const isLastChapter = currentChapter === totalSpineItems - 1;
+    const status = isLastChapter ? 'completed' : 'reading';
+
+    const timer = setTimeout(() => {
+      updateProgress({
+        userBookId,
+        data: {
+          lastPosition: currentChapter,
+          totalPages: totalSpineItems,
+          status,
+          lastReadAt: new Date().toISOString(),
+        },
+      });
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [currentChapter, totalSpineItems, userBookId]);
+
   const goToChapterByHref = (href: string) => {
     if (!epub?.order?.readingOrder || !id) return;
     let target = href.split('#')[0];
@@ -106,7 +135,6 @@ export const useReader = (id: string | undefined) => {
       .replace(/^\.\//, ''); //  ./
     const index = epub.order.readingOrder.indexOf(target);
     if (index !== -1) {
-      // ARREGLO STORE: Usamos setChapter con el ID
       setChapter(id, index);
     }
   };
@@ -169,5 +197,6 @@ export const useReader = (id: string | undefined) => {
     totalChapters: totalSpineItems,
     goToChapterByHref,
     scrollRef,
+    userBookId,
   };
 };
