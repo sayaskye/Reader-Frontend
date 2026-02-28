@@ -14,9 +14,14 @@ import { useBookFilters } from '@/features/library/hooks';
 interface StickToTopProps {
   controls: ReturnType<typeof useBookFilters>;
   isFetching: boolean;
+  onImportClick: () => void;
 }
 
-export const StickToTop = ({ controls, isFetching }: StickToTopProps) => {
+export const StickToTop = ({
+  controls,
+  isFetching,
+  onImportClick,
+}: StickToTopProps) => {
   const { searchTerm, setSearchTerm, form, currentFilters } = controls;
 
   return (
@@ -69,7 +74,10 @@ export const StickToTop = ({ controls, isFetching }: StickToTopProps) => {
 
         <div className="bg-muted mx-2 h-6 w-px"></div>
 
-        <Button className="bg-primary hover:bg-primary/90 h-10 rounded-xl px-5 font-bold">
+        <Button
+          className="bg-primary hover:bg-primary/90 h-10 cursor-pointer rounded-xl px-5 font-bold"
+          onClick={onImportClick}
+        >
           <Plus size={16} className="mr-2" />
           Import
         </Button>
