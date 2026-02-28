@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { Aside } from '@/features/reader/components/Aside';
 import { Content } from '@/features/reader/components/Content';
-import { SideMenu } from '@/features/reader/components/SideMenu';
 import { useReader } from '@/features/reader/hooks';
 
 export const Reader = () => {
@@ -47,7 +46,7 @@ export const Reader = () => {
           scrollRef={scrollRef}
           goToChapterByHref={goToChapterByHref}
         />
-        <SideMenu />
+        {/* <SideMenu /> */}
       </div>
       {/* <SettingsModal /> */}
     </div>

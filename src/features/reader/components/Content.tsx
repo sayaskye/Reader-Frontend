@@ -40,7 +40,7 @@ export const Content = ({
       onClick={handleInternalClick}
       ref={scrollRef}
     >
-      <div className="toolbar-hover-zone group absolute top-0 right-0 left-0 z-30 h-24">
+      {/* <div className="toolbar-hover-zone group absolute top-0 right-0 left-0 z-30 h-24">
         <div className="toolbar-container -translate-y-4 p-6 opacity-0 transition-all duration-300 ease-out">
           <div className="bg-card border-t-primary/95 border-foreground mx-auto flex max-w-4xl items-center justify-between rounded-xl border px-6 py-3 shadow-sm backdrop-blur-sm">
             <div className="flex items-center gap-4">
@@ -62,7 +62,7 @@ export const Content = ({
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="text-foreground mx-auto max-w-5xl flex-1 px-12 pt-10 pb-30 font-serif text-lg leading-[1.9] select-text">
         <div
