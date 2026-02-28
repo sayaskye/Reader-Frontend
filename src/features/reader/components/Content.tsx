@@ -2,22 +2,6 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 
-interface ContentProps {
-  isLoading: boolean;
-  error: Error;
-  htmlChapter: string;
-  currentChapter: number;
-  totalChapters: number;
-
-  hasPrevPage: boolean;
-  handlePrev: () => void;
-  hasNextPage: boolean;
-  handleNext: () => void;
-
-  scrollRef: any;
-  goToChapterByHref: (href: string) => void;
-}
-
 export const Content = ({
   isLoading,
   error,
@@ -30,7 +14,7 @@ export const Content = ({
   handleNext,
   scrollRef,
   goToChapterByHref,
-}: ContentProps) => {
+}: any) => {
   const navigate = useNavigate();
   const handleInternalClick = (e: React.MouseEvent) => {
     const target = (e.target as HTMLElement).closest('a[data-epub-link]');
