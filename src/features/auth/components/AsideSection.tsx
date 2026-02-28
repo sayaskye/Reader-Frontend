@@ -32,7 +32,7 @@ export const AsideSection = () => {
       </div>
       <div className="relative z-10">
         <p className="text-foreground text-sm font-medium tracking-wide">
-          © 2024 Lumina Systems. All rights reserved.
+          © 2026 Andrés Cazares.
         </p>
       </div>
       <div className="pointer-events-none absolute inset-0 z-0 opacity-10 mix-blend-multiply">
