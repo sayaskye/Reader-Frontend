@@ -9,9 +9,9 @@ export const Sidebar = () => {
   const changeTheme = theme === 'light' ? 'dark' : 'light';
   const { mutate: logout, isPending } = useLogout();
   return (
-    <aside className="border-muted bg-card flex w-20 flex-col items-center gap-8 border-r py-8">
-      <div className="bg-primary text-background shadow-primary/10 flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl shadow-lg">
-        <Library strokeWidth={3} size={40} />
+    <aside className="border-muted bg-card flex w-10 flex-col items-center gap-8 border-r py-8 md:w-20">
+      <div className="bg-primary text-background shadow-primary/10 flex h-6 w-6 cursor-pointer items-center justify-center rounded-sm shadow-lg md:h-12 md:w-12 md:rounded-xl">
+        <Library strokeWidth={3} />
       </div>
       {/* <nav className="flex flex-col gap-6">
         <button className="text-primary bg-primary/10 flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl">

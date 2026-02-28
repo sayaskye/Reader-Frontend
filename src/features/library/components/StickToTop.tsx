@@ -25,7 +25,7 @@ export const StickToTop = ({
   const { searchTerm, setSearchTerm, form, currentFilters } = controls;
 
   return (
-    <header className="glass-panel sticky top-0 z-50 flex items-center justify-between gap-6 px-8 py-4">
+    <header className="glass-panel sticky top-0 z-50 flex scale-90 flex-col items-center justify-between gap-6 px-8 py-4 md:scale-100 md:flex-row">
       <div className="flex max-w-2xl flex-1 items-center gap-4">
         <div className="relative w-full">
           <span className="text-foreground/50 absolute top-1/2 left-4 -translate-y-1/2">

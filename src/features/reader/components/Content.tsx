@@ -1,18 +1,12 @@
-import {
-  ArrowBigLeftDashIcon,
-  ChevronLeft,
-  ChevronRight,
-  Search,
-  Settings,
-} from 'lucide-react';
-import { getChapterTitle } from '@/lib/normalize-title';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 export const Content = ({
   isLoading,
   error,
   htmlChapter,
   currentChapter,
-  currentChapterTitle,
   hasPrevPage,
   handlePrev,
   totalChapters,
@@ -21,6 +15,7 @@ export const Content = ({
   scrollRef,
   goToChapterByHref,
 }: any) => {
+  const navigate = useNavigate();
   const handleInternalClick = (e: React.MouseEvent) => {
     const target = (e.target as HTMLElement).closest('a[data-epub-link]');
     if (target) {
@@ -40,6 +35,15 @@ export const Content = ({
       onClick={handleInternalClick}
       ref={scrollRef}
     >
+      <div className="w-full p-5">
+        <Button
+          className="flex w-full md:hidden"
+          onClick={() => navigate(`/library`)}
+        >
+          Back to library
+        </Button>
+      </div>
+
       {/* <div className="toolbar-hover-zone group absolute top-0 right-0 left-0 z-30 h-24">
         <div className="toolbar-container -translate-y-4 p-6 opacity-0 transition-all duration-300 ease-out">
           <div className="bg-card border-t-primary/95 border-foreground mx-auto flex max-w-4xl items-center justify-between rounded-xl border px-6 py-3 shadow-sm backdrop-blur-sm">
@@ -71,7 +75,7 @@ export const Content = ({
         />
       </div>
 
-      <div className="bg-card border-primary/90 fixed bottom-8 left-1/2 z-10 flex -translate-x-1/2 items-center gap-6 rounded-full border px-6 py-3 shadow-sm backdrop-blur-md">
+      <div className="bg-card border-primary/90 fixed bottom-8 left-1/2 z-10 flex w-full -translate-x-1/2 scale-75 items-center justify-center gap-6 rounded-full border px-6 py-3 shadow-sm backdrop-blur-md md:w-auto md:scale-100">
         {/* Botón Prev */}
         <button
           className={`text-primary flex cursor-pointer items-center gap-2 transition-colors ${

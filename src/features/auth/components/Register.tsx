@@ -1,4 +1,3 @@
-import { Library } from 'lucide-react';
 import RegisterForm from './RegisterForm';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,24 +6,12 @@ export const Register = () => {
   return (
     <main className="bg-background flex flex-1 flex-col items-center justify-center p-6 lg:p-12 xl:p-24">
       <div className="w-full max-w-md space-y-8">
-        <div className="mb-8 flex justify-center lg:hidden">
-          <div className="flex items-center gap-2">
-            <div className="bg-primary flex h-8 w-8 items-center justify-center rounded-lg shadow-lg">
-              <span className="text-sm text-white">
-                <Library strokeWidth={3} size={40} />
-              </span>
-            </div>
-            <span className="text-foreground text-xl font-bold tracking-tight">
-              LuminaReader
-            </span>
-          </div>
-        </div>
         <div className="text-center lg:text-left">
           <h2 className="text-foreground mb-2 font-serif text-3xl font-bold">
-            Welcome Back
+            Welcome
           </h2>
           <p className="text-foreground">
-            Enter your credentials to access your library.
+            Enter your credentials to create an account.
           </p>
         </div>
         <div className="bg-card border-primary/5 flex rounded-lg border p-1">
