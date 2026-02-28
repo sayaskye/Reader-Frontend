@@ -45,8 +45,8 @@ export const useToggleFavorite = () => {
         queryClient.setQueryData(queryKey, oldData);
       });
     },
-    /* onSettled: () => {
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: booksKeys.lists() });
-    }, */
+    },
   });
 };
