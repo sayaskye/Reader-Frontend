@@ -7,6 +7,7 @@ export interface LibraryFilters {
   status: string;
   genre: string;
   isFavorite: boolean;
+  limit: number;
   [key: string]: any;
 }
 
@@ -17,6 +18,7 @@ export const useBookFilters = () => {
       status: 'all',
       genre: 'all',
       isFavorite: false,
+      limit: 20,
     },
   });
   const resetFilters = () => {

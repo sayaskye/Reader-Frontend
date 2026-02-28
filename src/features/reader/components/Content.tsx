@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom';
 import {
   ArrowBigLeftDashIcon,
   ChevronLeft,
@@ -6,25 +5,22 @@ import {
   Search,
   Settings,
 } from 'lucide-react';
-import { useReader } from '@/features/reader/hooks';
 import { getChapterTitle } from '@/lib/normalize-title';
 
-export const Content = () => {
-  const { id } = useParams<{ id: string }>();
-  const {
-    isLoading,
-    error,
-    htmlChapter,
-    currentChapter,
-    currentChapterTitle,
-    hasPrevPage,
-    handlePrev,
-    totalChapters,
-    hasNextPage,
-    handleNext,
-    scrollRef,
-    goToChapterByHref,
-  } = useReader(id);
+export const Content = ({
+  isLoading,
+  error,
+  htmlChapter,
+  currentChapter,
+  currentChapterTitle,
+  hasPrevPage,
+  handlePrev,
+  totalChapters,
+  hasNextPage,
+  handleNext,
+  scrollRef,
+  goToChapterByHref,
+}: any) => {
   const handleInternalClick = (e: React.MouseEvent) => {
     const target = (e.target as HTMLElement).closest('a[data-epub-link]');
     if (target) {
@@ -68,7 +64,7 @@ export const Content = () => {
         </div>
       </div>
 
-      <div className="text-foreground mx-auto max-w-5xl flex-1 px-12 pt-10 pb-20 font-serif text-lg leading-[1.9] select-text">
+      <div className="text-foreground mx-auto max-w-5xl flex-1 px-12 pt-10 pb-30 font-serif text-lg leading-[1.9] select-text">
         <div
           dangerouslySetInnerHTML={{ __html: htmlChapter }}
           className="prose prose-reader prose-lg prose-a:no-underline prose-headings:text-primary prose-headings:mb-12 prose-headings:text-4xl prose-headings:font-bold prose-p:mb-8 prose-p:ndent-8 max-w-none"

@@ -12,6 +12,15 @@ export const Reader = () => {
     goToChapterByHref,
     totalChapters,
     epub,
+    isLoading,
+    error,
+    htmlChapter,
+    currentChapterTitle,
+    hasPrevPage,
+    handlePrev,
+    hasNextPage,
+    handleNext,
+    scrollRef,
   } = useReader(id);
 
   return (
@@ -24,7 +33,20 @@ export const Reader = () => {
           onJumpToChapter={goToChapterByHref}
           totalChapters={totalChapters}
         />
-        <Content />
+        <Content
+          isLoading={isLoading}
+          error={error}
+          htmlChapter={htmlChapter}
+          currentChapter={currentChapter}
+          currentChapterTitle={currentChapterTitle}
+          hasPrevPage={hasPrevPage}
+          handlePrev={handlePrev}
+          totalChapters={totalChapters}
+          hasNextPage={hasNextPage}
+          handleNext={handleNext}
+          scrollRef={scrollRef}
+          goToChapterByHref={goToChapterByHref}
+        />
         <SideMenu />
       </div>
       {/* <SettingsModal /> */}

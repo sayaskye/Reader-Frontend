@@ -15,7 +15,7 @@ import { booksKeys } from '@/lib/tanstack';
 
 export const Library = () => {
   const filterControls = useBookFilters();
-  const { isFetching } = useGetBooks(filterControls.currentFilters);
+  const queryBooks = useGetBooks(filterControls.currentFilters);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const queryClient = useQueryClient();
 
@@ -36,11 +36,11 @@ export const Library = () => {
       <main className="bg-background flex h-screen flex-1 flex-col overflow-hidden">
         <StickToTop
           controls={filterControls}
-          isFetching={isFetching}
+          isFetching={queryBooks.isFetching}
           onImportClick={() => setIsImportModalOpen(true)}
         />
         <LibraryContent
-          filters={filterControls.currentFilters}
+          queryBooks={queryBooks}
           onResetFilters={filterControls.resetFilters}
         />
       </main>

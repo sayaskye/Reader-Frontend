@@ -1,19 +1,18 @@
 import { Grid2x2, List } from 'lucide-react';
 import { useInfiniteScroll } from '@/hooks';
-import { useGetBooks, type LibraryFilters } from '@/features/library/hooks';
 import { DownloadableBookCard } from '@/features/library/components';
 import { EmptyLibrary } from './EmptyLibrary';
+import type { useGetBooks } from '@/features/library/hooks';
 
 interface LibraryContentProps {
-  filters: LibraryFilters;
   onResetFilters: () => void;
+  queryBooks: ReturnType<typeof useGetBooks>;
 }
 
 export const LibraryContent = ({
-  filters,
   onResetFilters,
+  queryBooks,
 }: LibraryContentProps) => {
-  const queryBooks = useGetBooks({ ...filters, limit: 20 });
   const allBooks = queryBooks.data?.pages.flatMap((page) => page.data) ?? [];
   const isUpdating = queryBooks.isPlaceholderData;
   const isEmpty = allBooks.length === 0 && !queryBooks.isLoading;

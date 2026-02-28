@@ -2,7 +2,7 @@ import { ChevronUp, Edit, Languages, Share2 } from 'lucide-react';
 
 export const SideMenu = () => {
   return (
-    <div className="bg-card z-20 flex h-full w-16 flex-col items-center gap-6 py-8">
+    <div className="bg-card z-20 hidden h-full w-16 flex-col items-center gap-6 py-8 md:flex">
       <button className="group relative">
         <span className="text-primary group-hover:text-accent transition-colors">
           <Edit />

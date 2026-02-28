@@ -34,7 +34,7 @@ export const Aside = ({
       : 0;
 
   return (
-    <aside className="bg-card border-card z-20 flex h-full w-72 flex-col border-r shadow-xl shadow-black/10">
+    <aside className="bg-card border-card z-20 hidden h-full w-72 flex-col border-r shadow-xl shadow-black/10 md:flex">
       <div className="border-card border-b p-6">
         <div className="mb-6 flex items-center gap-3">
           <div

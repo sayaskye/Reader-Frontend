@@ -6,7 +6,7 @@ import type {
   GetBooksParams,
 } from '@/features/library/types/book';
 
-export const useGetBooks = (params: GetBooksParams = { limit: 10 }) => {
+export const useGetBooks = (params: GetBooksParams) => {
   return useInfiniteQuery<PaginatedUserBooks>({
     queryKey: booksKeys.list(params),
     queryFn: async ({ pageParam = 1 }) =>
