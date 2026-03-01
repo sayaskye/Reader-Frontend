@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { authKeys } from '@/lib/tanstack';
 import type { LoginFormValues } from '@/schemas';
 import { authService } from '@/features/auth/services';
+import { useNotificationStore } from '@/store/notifications';
 
 export const useLogin = () => {
   const navigate = useNavigate();
@@ -11,13 +12,12 @@ export const useLogin = () => {
   return useMutation({
     mutationKey: authKeys.all,
     mutationFn: (data: LoginFormValues) => authService.login(data),
-    onSuccess: (data) => {
+    onSuccess: () => {
       navigate('/library');
       queryClient.resetQueries();
-      console.log('Successful login', data);
     },
     onError: (error) => {
-      console.error('Error on login', error);
+      useNotificationStore.getState().notify(error.message, 'error');
     },
   });
 };

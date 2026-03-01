@@ -6,6 +6,7 @@ import {
 import { booksKeys } from '@/lib/tanstack';
 import { booksService } from '@/features/library/services';
 import type { PaginatedUserBooks } from '@/features/library/types/book';
+import { useNotificationStore } from '@/store/notifications';
 
 export const useToggleFavorite = () => {
   const queryClient = useQueryClient();
@@ -44,6 +45,7 @@ export const useToggleFavorite = () => {
       context?.previousQueries?.forEach(([queryKey, oldData]) => {
         queryClient.setQueryData(queryKey, oldData);
       });
+      useNotificationStore.getState().notify('Favorite action error', 'error');
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: booksKeys.lists() });

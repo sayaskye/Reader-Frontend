@@ -1,3 +1,4 @@
+import { useNotificationStore } from '@/store/notifications';
 import axios, { AxiosError, type InternalAxiosRequestConfig } from 'axios';
 
 interface FailedRequest {
@@ -24,6 +25,48 @@ const processQueue = (error: Error | null = null) => {
   failedQueue = [];
 };
 
+//Interceptor for errors and success management
+api.interceptors.response.use(
+  (response) => {
+    /* if (response.data) {
+      useNotificationStore.getState().notify(response.data.message, 'success');
+    } */
+    return response;
+  },
+  (error) => {
+    const { response, request } = error;
+    const setCritical = useNotificationStore.getState().setCriticalError;
+    const notify = useNotificationStore.getState().notify;
+    // (4xx, 5xx)
+    if (response) {
+      const status = response.status;
+      const message =
+        response.data?.details?.file?.[0] ||
+        response.data?.error ||
+        'Internal server error';
+
+      if (status >= 500) {
+        setCritical({ message, code: status });
+      } else {
+        notify(message, 'error');
+      }
+    }
+    // (Server Down / Timeout)
+    else if (request) {
+      // If no response, it's a infrastructure failure
+      const isOnline = window.navigator.onLine; //true if online
+      const message = isOnline
+        ? 'Server is offline'
+        : "You don't have internet access";
+      setCritical({ message, code: isOnline ? 0 : -1 });
+    } else {
+      notify('Internal error while processing the request', 'error');
+    }
+    return Promise.reject(error);
+  },
+);
+
+//Interceptor for refresh token
 api.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {

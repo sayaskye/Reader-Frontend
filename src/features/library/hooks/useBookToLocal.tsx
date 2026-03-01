@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { indexdbService } from '@/services';
+import { useNotificationStore } from '@/store/notifications';
 
 interface UseBookToLocalReturn {
   isLoading: boolean;
@@ -109,6 +110,7 @@ export const useBookToLocal = (): UseBookToLocalReturn => {
           err instanceof Error ? err : new Error('Failed to load book');
         setError(formattedError);
         setIsLoading(false);
+        useNotificationStore.getState().notify('Error on download', 'error');
         return null;
       }
     },

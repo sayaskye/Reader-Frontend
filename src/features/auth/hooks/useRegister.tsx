@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { authKeys } from '@/lib/tanstack';
 import type { RegisterFormValues } from '@/schemas';
 import { authService } from '@/features/auth/services';
+import { useNotificationStore } from '@/store/notifications';
 
 export const useRegister = () => {
   const navigate = useNavigate();
@@ -11,13 +12,13 @@ export const useRegister = () => {
   return useMutation({
     mutationKey: authKeys.all,
     mutationFn: (data: RegisterFormValues) => authService.register(data),
-    onSuccess: (data) => {
+    onSuccess: () => {
       navigate('/library');
       queryClient.resetQueries();
-      console.log('Successful register', data);
+      useNotificationStore.getState().notify('Successful register', 'success');
     },
     onError: (error) => {
-      console.error('Error on register', error);
+      useNotificationStore.getState().notify(error.message, 'error');
     },
   });
 };
