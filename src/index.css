@@ -4,6 +4,9 @@
 
 @plugin '@tailwindcss/typography';
 
+@custom-variant touch (@media (hover: none));
+@custom-variant mouse (@media (hover: hover));
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

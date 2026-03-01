@@ -35,7 +35,7 @@ export const BookCard = ({ userBook }: Props) => {
           data-alt={book.title}
           src={book.coverUrl}
         />
-        <div className="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/80 via-transparent to-transparent p-4 opacity-0 transition-opacity group-hover:opacity-100">
+        <div className="mouse:opacity-0 mouse:group-hover:opacity-100 touch:opacity-100 absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/80 via-transparent to-transparent p-4 transition-opacity">
           <button
             className="bg-primary text-background flex cursor-pointer items-center justify-center gap-2 rounded-lg py-2 text-sm font-bold shadow-lg"
             onClick={() => navigate(`/reader/${book.id}`)}

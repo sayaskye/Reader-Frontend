@@ -31,7 +31,7 @@ export const Library = () => {
     queryClient.invalidateQueries({ queryKey: booksKeys.all });
   };
   return (
-    <div className="bg-background text-foreground flex min-h-screen">
+    <div className="bg-background text-foreground flex min-h-screen flex-col md:flex-row">
       <Sidebar />
       <main className="bg-background flex h-screen flex-1 flex-col overflow-hidden">
         <StickToTop

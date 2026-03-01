@@ -26,7 +26,7 @@ export const StickToTop = ({
 
   return (
     <header className="glass-panel sticky top-0 z-50 flex scale-90 flex-col items-center justify-between gap-6 px-8 py-4 md:scale-100 md:flex-row">
-      <div className="flex max-w-2xl flex-1 items-center gap-4">
+      <div className="flex w-full flex-1 items-center gap-4 md:max-w-2xl">
         <div className="relative w-full">
           <span className="text-foreground/50 absolute top-1/2 left-4 -translate-y-1/2">
             {isFetching ? (
@@ -44,11 +44,11 @@ export const StickToTop = ({
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex w-full items-center justify-around gap-3 md:w-auto">
         <Toggle
           pressed={currentFilters.isFavorite}
           onPressedChange={(pressed) => form.setValue('isFavorite', pressed)}
-          className="data-[state=on]:bg-primary data-[state=on]:text-background h-10 w-10 rounded-xl"
+          className="data-[state=on]:bg-primary data-[state=on]:text-background border-primary/70 text-primary h-10 w-10 rounded-xl border"
         >
           <Star
             size={18}
@@ -72,7 +72,7 @@ export const StickToTop = ({
           </SelectContent>
         </Select>
 
-        <div className="bg-muted mx-2 h-6 w-px"></div>
+        <div className="bg-muted mx-2 hidden h-6 w-px md:flex"></div>
 
         <Button
           className="bg-primary hover:bg-primary/90 h-10 cursor-pointer rounded-xl px-5 font-bold"
