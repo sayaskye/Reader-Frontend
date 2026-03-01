@@ -93,7 +93,10 @@ export const Aside = ({
               return (
                 <li key={index}>
                   <button
-                    onClick={() => onJumpToChapter(chapter.href)}
+                    onClick={() => {
+                      onJumpToChapter(chapter.href);
+                      console.log(chapter.href);
+                    }}
                     className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
                       isActive
                         ? 'text-foreground border-primary bg bg-primary/10 border-l-[3px] font-bold shadow-sm'

@@ -162,11 +162,27 @@ export const useReader = (id: string | undefined) => {
       .querySelectorAll('[style]')
       .forEach((el) => el.removeAttribute('style'));
 
+    doc.querySelectorAll('svg').forEach((svg) => {
+      const svgImage = svg.querySelector('image');
+      if (svgImage) {
+        const src =
+          svgImage.getAttribute('xlink:href') || svgImage.getAttribute('href');
+        if (src) {
+          const newImg = doc.createElement('img');
+          newImg.setAttribute('src', src);
+          newImg.className = 'epub-converted-img';
+          svg?.parentNode?.replaceChild(newImg, svg);
+        }
+      }
+    });
+
     doc.querySelectorAll('img').forEach((img) => {
       const src = img.getAttribute('src');
       if (!src) return;
       const zipPath = readerService.resolveZipPath(fullPath, src);
       img.setAttribute('src', `/epub-content/${bookId}/${zipPath}`);
+      img.style.maxWidth = '100%';
+      img.style.height = 'auto';
     });
 
     doc.querySelectorAll('a[href]').forEach((a) => {
