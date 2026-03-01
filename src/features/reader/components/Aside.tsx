@@ -2,6 +2,7 @@ import { normalizeAuthors } from '@/lib/normalize-authors';
 import { getChapterTitle } from '@/lib/normalize-title';
 import { Library } from 'lucide-react';
 import { useNavigate } from 'react-router';
+import { TocItem } from './TocItem';
 
 interface EpubData {
   zip: any; // JSZip instance
@@ -81,38 +82,16 @@ export const Aside = ({
             Chapters
           </span>
           <ul className="mt-3 space-y-1">
-            {toc?.map((chapter: any, index: number) => {
-              const currentFileInSpine =
-                epub?.order?.readingOrder[currentChapter];
-              const normalizedChapterHref = chapter.href
-                .split('#')[0]
-                .replace(/^\.\.\//, '');
-
-              const isActive = normalizedChapterHref === currentFileInSpine;
-
-              return (
-                <li key={index}>
-                  <button
-                    onClick={() => {
-                      onJumpToChapter(chapter.href);
-                      console.log(chapter.href);
-                    }}
-                    className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
-                      isActive
-                        ? 'text-foreground border-primary bg bg-primary/10 border-l-[3px] font-bold shadow-sm'
-                        : 'text-foreground hover:bg-primary/10 opacity-80'
-                    }`}
-                  >
-                    <span className="text-ssm w-4 font-serif opacity-60">
-                      {(index + 1).toString().padStart(2, '0')}
-                    </span>
-                    <span className="truncate">
-                      {getChapterTitle(chapter.title)}
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
+            {toc?.map((chapter: any, index: number) => (
+              <TocItem
+                key={index}
+                item={chapter}
+                index={index}
+                currentFileInSpine={epub?.order?.readingOrder[currentChapter]}
+                onJumpToChapter={onJumpToChapter}
+                getChapterTitle={getChapterTitle}
+              />
+            ))}
           </ul>
         </div>
         {/* <div>
