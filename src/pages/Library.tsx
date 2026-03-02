@@ -1,34 +1,27 @@
 import { useState } from 'react';
 
-import { useQueryClient } from '@tanstack/react-query';
-
 import {
   Sidebar,
   ImportBookModal,
   StickToTop,
 } from '@/features/library/components';
-import { useBookFilters, useGetBooks } from '@/features/library/hooks';
+import {
+  useBookFilters,
+  useGetBooks,
+  useUploadBook,
+} from '@/features/library/hooks';
 import { LibraryContent } from '@/features/library/components/LibraryContent';
-
-import { api } from '@/api/axios';
-import { booksKeys } from '@/lib/tanstack';
 
 export const Library = () => {
   const filterControls = useBookFilters();
   const queryBooks = useGetBooks(filterControls.currentFilters);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
-  const queryClient = useQueryClient();
+  const uploadBookMutation = useUploadBook();
 
   const handleUpload = async (data: { file: File }) => {
     const formData = new FormData();
     formData.append('file', data.file);
-
-    await api.post('/books', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    queryClient.invalidateQueries({ queryKey: booksKeys.all });
+    await uploadBookMutation.mutateAsync(formData);
   };
   return (
     <div className="bg-background text-foreground flex min-h-screen flex-col md:flex-row">

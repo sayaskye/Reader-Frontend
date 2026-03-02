@@ -13,4 +13,12 @@ export const booksService = {
     const response = await api.patch(`/user-books/favorite/${bookId}`);
     return response.data;
   },
+  uploadBook: async (formData: FormData) => {
+    const response = await api.post('/books', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  },
 };
