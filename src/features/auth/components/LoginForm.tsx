@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { AtSign, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
+import { AtSign, Lock, Eye, EyeOff, ArrowRight, Loader2 } from 'lucide-react';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { loginSchema, type LoginFormValues } from '@/schemas';
@@ -121,14 +121,27 @@ export default function LoginForm() {
       </div> */}
 
       {/* Submit button */}
-      <button
-        className="bg-primary hover:bg-primary/90 text-primary-foreground my-6 flex w-full items-center justify-center gap-2 rounded-xl py-4 font-bold shadow-lg transition-all active:scale-95 disabled:opacity-70"
-        type="submit"
-        disabled={loginMutation.isPending ?? formState.isSubmitting}
-      >
-        <span>{formState.isSubmitting ? 'Signing In...' : 'Sign In'}</span>
-        <ArrowRight size={18} />
-      </button>
+      {
+        <button
+          className="bg-primary hover:bg-primary/90 text-primary-foreground my-6 flex w-full items-center justify-center gap-2 rounded-xl py-4 font-bold shadow-lg transition-all active:scale-95 disabled:opacity-70"
+          type="submit"
+          disabled={loginMutation.isPending ?? formState.isSubmitting}
+        >
+          {(loginMutation.isPending ?? formState.isSubmitting) ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Signing In...
+            </>
+          ) : (
+            <>
+              <span>
+                {formState.isSubmitting ? 'Signing In...' : 'Sign In'}
+              </span>
+              <ArrowRight size={18} />
+            </>
+          )}
+        </button>
+      }
     </form>
   );
 }

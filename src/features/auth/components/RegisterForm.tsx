@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { AtSign, Lock, Eye, EyeOff, ArrowRight, User } from 'lucide-react';
+import {
+  AtSign,
+  Lock,
+  Eye,
+  EyeOff,
+  ArrowRight,
+  User,
+  Loader2,
+} from 'lucide-react';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { registerSchema, type RegisterFormValues } from '@/schemas';
@@ -137,8 +145,19 @@ export default function RegisterForm() {
         type="submit"
         disabled={registerMutation.isPending ?? formState.isSubmitting}
       >
-        <span>{formState.isSubmitting ? 'Registering...' : 'Register'}</span>
-        <ArrowRight size={18} />
+        {(registerMutation.isPending ?? formState.isSubmitting) ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Registering...
+          </>
+        ) : (
+          <>
+            <span>
+              {formState.isSubmitting ? 'Registering...' : 'Register'}
+            </span>
+            <ArrowRight size={18} />
+          </>
+        )}
       </button>
     </form>
   );
