@@ -9,6 +9,7 @@ export const Reader = () => {
     currentBookData,
     currentChapter,
     goToChapterByHref,
+    getChapterByHref,
     totalChapters,
     epub,
     isLoading,
@@ -30,6 +31,7 @@ export const Reader = () => {
           currentBook={currentBookData}
           currentChapter={currentChapter}
           onJumpToChapter={goToChapterByHref}
+          getChapterByHref={getChapterByHref}
           totalChapters={totalChapters}
         />
         <Content

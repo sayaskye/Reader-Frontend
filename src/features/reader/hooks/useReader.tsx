@@ -127,16 +127,21 @@ export const useReader = (id: string | undefined) => {
   }, [currentChapter, totalSpineItems, userBookId]);
 
   const goToChapterByHref = (href: string) => {
+    if (!id) return;
+    const index = getChapterByHref(href);
+    if (index !== -1) {
+      setChapter(id, index);
+    }
+  };
+
+  const getChapterByHref = (href: string) => {
     if (!epub?.order?.readingOrder || !id) return;
     let target = href.split('#')[0];
     target = target
       .replace(/^\.\.\//, '') //  ../
       .replace(/^OEBPS\//, '') //  OEBPS/
       .replace(/^\.\//, ''); //  ./
-    const index = epub.order.readingOrder.indexOf(target);
-    if (index !== -1) {
-      setChapter(id, index);
-    }
+    return epub.order.readingOrder.indexOf(target);
   };
 
   const renderChapter = async (
@@ -212,6 +217,7 @@ export const useReader = (id: string | undefined) => {
     currentChapterTitle,
     totalChapters: totalSpineItems,
     goToChapterByHref,
+    getChapterByHref,
     scrollRef,
     userBookId,
   };

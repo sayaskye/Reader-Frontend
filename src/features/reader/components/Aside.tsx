@@ -1,20 +1,23 @@
+import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router';
+import { Library, Eye, EyeOff } from 'lucide-react';
 import { normalizeAuthors } from '@/lib/normalize-authors';
 import { getChapterTitle } from '@/lib/normalize-title';
-import { Library } from 'lucide-react';
-import { useNavigate } from 'react-router';
 import { TocItem } from './TocItem';
 
 interface EpubData {
-  zip: any; // JSZip instance
+  zip: any;
   opfPath: string;
   order: {
-    readingOrder: string[]; // spine
+    readingOrder: string[];
   };
 }
+
 interface AsideProps {
   currentBook: any;
   currentChapter: number;
   onJumpToChapter: (href: string) => void;
+  getChapterByHref: (href: string) => void;
   totalChapters: number;
   epub: EpubData;
 }
@@ -23,19 +26,46 @@ export const Aside = ({
   currentBook,
   currentChapter,
   onJumpToChapter,
+  getChapterByHref,
   totalChapters,
   epub,
 }: AsideProps) => {
   const navigate = useNavigate();
-  if (!currentBook) return;
+  const [hideSpoilers, setHideSpoilers] = useState(false);
+
+  if (!currentBook) return null;
+
   const toc = currentBook?.tableOfContents ?? [];
+  const readingOrder = epub?.order?.readingOrder ?? [];
+  const currentFile = readingOrder[currentChapter];
+
   const progress =
     totalChapters > 0
       ? Math.round(((currentChapter + 1) / totalChapters) * 100)
       : 0;
 
+  const filteredToc = useMemo(() => {
+    if (!hideSpoilers) return toc;
+
+    const isVisible = (item: any) => {
+      const normalizedHref = item.href.split('#')[0].replace(/^\.\.\//, '');
+      const itemIndexInSpine = readingOrder.indexOf(normalizedHref);
+      return itemIndexInSpine === -1 || itemIndexInSpine <= currentChapter;
+    };
+
+    const filterRecursive = (items: any[]): any[] => {
+      return items.filter(isVisible).map((item) => ({
+        ...item,
+        children: item.children ? filterRecursive(item.children) : [],
+      }));
+    };
+
+    return filterRecursive(toc);
+  }, [toc, hideSpoilers, currentChapter, readingOrder]);
+
   return (
     <aside className="bg-card border-card z-20 hidden h-full w-72 flex-col border-r shadow-xl shadow-black/10 md:flex">
+      {/* Header & Library Link */}
       <div className="border-card border-b p-6">
         <div className="mb-6 flex items-center gap-3">
           <div
@@ -49,6 +79,7 @@ export const Aside = ({
           </h1>
         </div>
 
+        {/* Book Details */}
         <div className="space-y-1">
           <div className="text-foreground mb-3 text-xs font-semibold tracking-widest uppercase">
             Book Details
@@ -76,26 +107,48 @@ export const Aside = ({
         </div>
       </div>
 
+      {/* Navigation & Chapters */}
       <nav className="custom-scrollbar flex-1 overflow-y-auto p-4">
         <div className="mb-6">
-          <span className="text-foreground text-ssm tracking-widest-plus px-2 font-bold uppercase">
-            Chapters
-          </span>
+          <div className="flex items-center justify-between px-2">
+            <span className="text-foreground text-ssm font-bold tracking-widest uppercase">
+              Chapters
+            </span>
+            <button
+              onClick={() => setHideSpoilers(!hideSpoilers)}
+              className={`hover:bg-primary/10 rounded-md p-1 transition-colors ${
+                hideSpoilers ? 'text-primary' : 'text-foreground/40'
+              }`}
+              title={
+                hideSpoilers ? 'Show all chapters' : 'Hide upcoming chapters'
+              }
+            >
+              {hideSpoilers ? <EyeOff size={16} /> : <Eye size={16} />}
+            </button>
+          </div>
+
           <ul className="mt-3 space-y-1">
-            {toc?.map((chapter: any, index: number) => (
+            {filteredToc.map((chapter: any, index: number) => (
               <TocItem
-                key={index}
+                key={`${chapter.href}-${index}`}
                 item={chapter}
                 index={index}
-                currentFileInSpine={epub?.order?.readingOrder[currentChapter]}
+                currentFileInSpine={currentFile}
                 onJumpToChapter={onJumpToChapter}
+                getChapterByHref={getChapterByHref}
                 getChapterTitle={getChapterTitle}
               />
             ))}
+            {hideSpoilers && toc.length > filteredToc.length && (
+              <li className="text-foreground/90 text-ssm px-3 py-2 italic">
+                Future chapters hidden to avoid spoilers
+              </li>
+            )}
           </ul>
         </div>
       </nav>
 
+      {/* Progress Footer */}
       <div className="border-card bg-background border-t p-4">
         <div className="mb-2 flex items-center justify-between text-[11px] font-bold">
           <span className="text-foreground">READING PROGRESS</span>

@@ -1,19 +1,34 @@
+import { useParams } from 'react-router-dom';
+import { readerStore } from '@/store/reader';
+
 export const TocItem = ({
   item,
   index,
   depth = 0,
   currentFileInSpine,
   onJumpToChapter,
+  getChapterByHref,
   getChapterTitle,
 }: any) => {
+  const { id } = useParams<{ id: string }>();
+  if (!id) return null;
   const normalizedChapterHref = item.href.split('#')[0].replace(/^\.\.\//, '');
 
   const isActive = normalizedChapterHref === currentFileInSpine;
 
+  const jumpToChapterAndLocalSave = (href: number, id: string) => {
+    readerStore.setState((state) => {
+      const newProgress = { ...state.progress };
+      newProgress[id] = getChapterByHref(href);
+      return { progress: newProgress };
+    });
+    onJumpToChapter(href);
+  };
+
   return (
     <li>
       <button
-        onClick={() => onJumpToChapter(item.href)}
+        onClick={() => jumpToChapterAndLocalSave(item.href, id)}
         className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
           isActive
             ? 'text-foreground border-primary bg-primary/10 border-l-[3px] font-bold shadow-sm'
