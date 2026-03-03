@@ -1,4 +1,4 @@
-import LoginForm from './LogInForm';
+import LoginForm from './LoginForm';
 import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
