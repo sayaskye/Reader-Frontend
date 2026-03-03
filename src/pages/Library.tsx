@@ -11,12 +11,15 @@ import {
   useUploadBook,
 } from '@/features/library/hooks';
 import { LibraryContent } from '@/features/library/components/LibraryContent';
+import { useUpdateProgressFromApi } from '@/features/library/hooks/useUpdateProgressFromApi';
 
 export const Library = () => {
   const filterControls = useBookFilters();
   const queryBooks = useGetBooks(filterControls.currentFilters);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const uploadBookMutation = useUploadBook();
+
+  useUpdateProgressFromApi({ queryBooks });
 
   const handleUpload = async (data: { file: File }) => {
     const formData = new FormData();
