@@ -1,9 +1,10 @@
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router';
 import { Library, Eye, EyeOff } from 'lucide-react';
 import { normalizeAuthors } from '@/lib/normalize-authors';
 import { getChapterTitle } from '@/lib/normalize-title';
 import { TocItem } from './TocItem';
+import { useSpoilerStore } from '@/store/spoilers';
 
 interface EpubData {
   zip: any;
@@ -31,7 +32,7 @@ export const Aside = ({
   epub,
 }: AsideProps) => {
   const navigate = useNavigate();
-  const [hideSpoilers, setHideSpoilers] = useState(false);
+  const { hideSpoilers, toggleSpoiler } = useSpoilerStore();
 
   if (!currentBook) return null;
 
@@ -115,7 +116,7 @@ export const Aside = ({
               Chapters
             </span>
             <button
-              onClick={() => setHideSpoilers(!hideSpoilers)}
+              onClick={() => toggleSpoiler()}
               className={`hover:bg-primary/10 rounded-md p-1 transition-colors ${
                 hideSpoilers ? 'text-primary' : 'text-foreground/40'
               }`}

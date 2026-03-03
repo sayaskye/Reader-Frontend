@@ -1,11 +1,11 @@
 import { Library, Loader2, LogOut, MoonStar, Sun } from 'lucide-react';
-import { useTheme } from '@/hooks';
 import { useLogout } from '@/features/auth/hooks';
 import { Button } from '@/components/ui/button';
+import { useThemeStore } from '@/store/theme';
 
 export const Sidebar = () => {
   //TODO: this won't work this way, it is just a place holder
-  const { applyTheme, theme } = useTheme();
+  const { theme, setTheme } = useThemeStore();
   const changeTheme = theme === 'light' ? 'dark' : 'light';
   const { mutate: logout, isPending } = useLogout();
   return (
@@ -37,7 +37,7 @@ export const Sidebar = () => {
         <Button
           variant="ghost"
           className="hover:text-primary flex cursor-pointer items-center justify-center rounded-xl transition-colors"
-          onClick={() => applyTheme(changeTheme)}
+          onClick={() => setTheme(changeTheme)}
         >
           {theme === 'light' ? (
             <div className="flex flex-row items-center justify-between gap-2">
