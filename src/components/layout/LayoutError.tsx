@@ -1,5 +1,25 @@
+import { useEffect } from 'react';
 import { Toaster } from 'sonner';
 import { CriticalErrorOverlay } from '../CriticalError';
+
+const WAKE_UP_KEY = 'backend_pinged';
+
+/** Silently pings the backend once per session to wake up the free Koyeb instance. */
+function BackendWakeup() {
+  useEffect(() => {
+    if (sessionStorage.getItem(WAKE_UP_KEY)) return;
+    sessionStorage.setItem(WAKE_UP_KEY, '1');
+
+    const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+
+    // Fire-and-forget — errors are intentionally swallowed
+    fetch(`${baseURL}/health`, { method: 'GET', credentials: 'include' }).catch(
+      () => {},
+    );
+  }, []);
+
+  return null;
+}
 
 interface Props {
   children: React.ReactNode;
@@ -7,6 +27,7 @@ interface Props {
 export default function LayoutError({ children }: Props) {
   return (
     <div className="bg-background relative min-h-screen">
+      <BackendWakeup />
       {children}
       <CriticalErrorOverlay />
       <Toaster
