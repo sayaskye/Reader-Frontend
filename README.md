@@ -55,3 +55,5 @@ bun run build
 ## Repository Information
 
 This repository is focused on the development of the EpubReader frontend. This project is not intended for public distribution or open-source contribution at this stage.
+
+Backend Repository: https://github.com/sayaskye/Reader-Backend
