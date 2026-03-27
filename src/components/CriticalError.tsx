@@ -23,10 +23,16 @@ export const CriticalErrorOverlay = () => {
     }
     setElapsed(0);
     const interval = setInterval(() => {
-      setElapsed((prev) => prev + 1);
+      setElapsed((prev) => {
+        const next = prev + 1;
+        if (next >= 35) {
+          setCriticalError(null);
+        }
+        return next;
+      });
     }, 1000);
     return () => clearInterval(interval);
-  }, [isServerOffline, criticalError]);
+  }, [isServerOffline, criticalError, setCriticalError]);
 
   const getErrorTitle = () => {
     if (!criticalError) return '';
@@ -37,7 +43,7 @@ export const CriticalErrorOverlay = () => {
   };
 
   const progressPercent = isServerOffline
-    ? Math.min((elapsed / 30) * 100, 99)
+    ? Math.min((elapsed / 35) * 100, 99)
     : 0;
 
   return (
@@ -108,9 +114,8 @@ export const CriticalErrorOverlay = () => {
             <p className="text-muted-foreground text-sm leading-relaxed">
               This is a demo running on a free instance that goes to sleep when
               inactive. It typically takes{' '}
-              <span className="text-foreground font-medium">~30 seconds</span>{' '}
-              to wake up. Please wait a moment and the page will recover
-              automatically.
+              <span className="text-foreground font-medium">~35 seconds</span>{' '}
+              to wake up. Please wait a moment and the page will recover.
             </p>
             <p className="text-muted-foreground text-sm leading-relaxed">
               Sorry for the inconvenience.
@@ -134,13 +139,13 @@ export const CriticalErrorOverlay = () => {
         <DialogFooter className="gap-2 sm:justify-center">
           <button
             onClick={() => setCriticalError(null)}
-            className="border-border text-muted-foreground hover:bg-muted w-full rounded-lg border px-4 py-2 font-medium transition-all active:scale-95"
+            className="border-border text-muted-foreground hover:bg-muted w-full cursor-pointer rounded-lg border px-4 py-2 font-medium transition-all active:scale-95"
           >
             Dismiss
           </button>
           <button
             onClick={() => window.location.reload()}
-            className="bg-primary text-primary-foreground w-full rounded-lg px-4 py-2 font-medium transition-all hover:opacity-90 active:scale-95"
+            className="bg-primary text-primary-foreground w-full cursor-pointer rounded-lg px-4 py-2 font-medium transition-all hover:opacity-90 active:scale-95"
           >
             Reload page
           </button>
